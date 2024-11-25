@@ -46,4 +46,10 @@ INNER JOIN casting_role ro ON pl.id_role = ro.id_role
 WHERE pl.id_actor = 1
 ORDER BY mo.release_date DESC
 
---h
+-- h
+SELECT pe.id_person, pe.first_name, pe.last_name
+FROM person pe
+INNER JOIN actor ac ON pe.id_person = ac.id_person
+INNER JOIN director di ON pe.id_person = di.id_person
+
+-- i
