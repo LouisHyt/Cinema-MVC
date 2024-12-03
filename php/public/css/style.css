@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root{
+    --accent-clr: #FF6500;
+    --discrete-clr: #5B5B5B;
+    --background-clr: #100F12;
+}
+
+@layer reset {
+
+    :is(*, *::before, *::after){
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    a{
+        text-decoration: none;
+        color: inherit;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+}
+
+body {
+    display: grid;
+    grid-template-areas: 
+        "sidebar navbar navbar"
+        "sidebar main main"
+        "sidebar main main";
+    grid-template-rows: auto 1fr 1fr;
+    grid-template-columns: auto 1fr 1fr;
+    font-family: Montserrat, sans-serif;
+}
+
+#sidebar{
+    grid-area: sidebar;
+}
+
+#navbar{
+    grid-area: navbar;
+}
+
+#content{
+    grid-area: main;
+}
