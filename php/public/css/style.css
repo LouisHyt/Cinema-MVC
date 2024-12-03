@@ -50,4 +50,5 @@ body {
 
 #content{
     grid-area: main;
+    padding: 1em;
 }

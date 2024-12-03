@@ -1,0 +1,117 @@
+#sidebar {
+    background-color: var(--background-clr);
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+
+.logo .cine {
+    color: white;
+}
+
+.logo .plus {
+    color: #ff6b00;
+}
+
+.navigation h3, .actors h3 {
+    color: var(--discrete-clr);
+    font-size: 14px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-bottom: 15px;
+}
+
+.nav-links a {
+    width: 100%;
+    color: white;
+    text-decoration: none;
+    display: grid;
+    grid-template-columns: 25px 1fr;
+    column-gap: 50px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.nav-links a.active {
+    background-color: var(--accent-clr);
+}
+
+.nav-links a:hover:not(.active) {
+    background-color: #333;
+}
+
+.nav-links i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.actors {
+    margin-top: 30px;
+}
+
+.actors-list {
+    list-style: none;
+    padding: 0;
+}
+
+.actors-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 5px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.actors-list li:hover {
+    background-color: #333;
+}
+
+.actors-list img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.actors-list span {
+    color: rgb(155, 155, 155);
+}
+
+.discover-more {
+    color: var(--discrete-clr);
+    font-size: 13px;
+    margin-top: 15px;
+    gap: 5px;
+    transition: color 0.3s;
+
+    & > i {
+        vertical-align: bottom;
+        margin-left: 5px;
+    }
+}
+
+.discover-more:hover {
+    color: #ff6b00;
+}
