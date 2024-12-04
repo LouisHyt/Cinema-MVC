@@ -1,31 +1,35 @@
 <?php
 
     use Controller\CinemaController;
+    use Controller\MovieController;
+    use Controller\PersonController;
 
     spl_autoload_register(function($class_name){
         include "$class_name.php";
     });
 
     $ctrlCinema = new CinemaController();
+    $ctrlFilm = new MovieController();
+    $ctrlPerson = new PersonController();
 
     $id = isset($_GET["id"]) ? $_GET["id"] : null;
 
     if(isset($_GET["action"])){
         switch($_GET["action"]) {
             case "listMovies" : 
-                $ctrlCinema->listMovies();
+                $ctrlFilm->listMovies();
             break;
             case "detailsMovie" : 
-                $ctrlCinema->detailsMovie($id);
+                $ctrlFilm->detailsMovie($id);
             break;
             case "listActors" :
-                $ctrlCinema->listActors();
+                $ctrlPerson->listActors();
             break;
             case "listDirectors" :
-                $ctrlCinema->listDirectors();
+                $ctrlPerson->listDirectors();
             break;
             case "detailsPerson" :
-                $ctrlCinema->detailsPerson($id);
+                $ctrlPerson->detailsPerson($id);
             break;
         }
     } else {

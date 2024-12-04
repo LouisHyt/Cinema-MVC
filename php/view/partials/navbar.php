@@ -7,7 +7,7 @@
     <div class="nav-icons">
         <a href="#" class="nav-icon">
             <i class="fas fa-bell"></i>
-            <span class="notification-badge">2</span>
+            <span class="notifications">2</span>
         </a>
         <a href="#" class="nav-icon">
             <i class="fas fa-plus"></i>

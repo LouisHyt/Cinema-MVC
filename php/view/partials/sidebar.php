@@ -1,4 +1,18 @@
+<?php
+
+    use Services\Utils;
+
+    $persons = Utils::getPersons();
+    $actors = $persons["actors"];
+    $directors = $persons["directors"];
+    
+?>
+
+
+
 <link rel="stylesheet" href="public/css/sidebar.css">
+<script src="public/js/sidebar.js" defer></script>
+
 <aside id="sidebar">
 
     <div class="logo">
@@ -40,32 +54,52 @@
         </ul>
     </div>
 
-    <div class="actors">
-        <h3>Acteurs</h3>
-        <ul class="actors-list">
-            <li>
-                <img src="public/images/actors/liam-neeson.jpg" alt="Liam Neeson">
-                <span>Liam Neeson</span>
-            </li>
-            <li>
-                <img src="public/images/actors/leonardo-dicaprio.jpg" alt="Leonardo DiCaprio">
-                <span>Leonardo DiCaprio</span>
-            </li>
-            <li>
-                <img src="public/images/actors/marion-cotillard.jpg" alt="Marion Cotillard">
-                <span>Marion Cotillard</span>
-            </li>
-            <li>
-                <img src="public/images/actors/robert-downey-jr.jpg" alt="Robert Downey Jr.">
-                <span>Robert Downey Jr.</span>
-            </li>
-            <li>
-                <img src="public/images/actors/emma-stone.jpg" alt="Emma Stone">
-                <span>Emma Stone</span>
-            </li>
+    <!-- Actors -->
+    <div class="actors persons">
+        <div class="title_section">
+            <h3>Acteurs</h3>
+            <i class="fa-solid fa-repeat switch-persons"></i>
+        </div>
+        <ul class="actors-list persons-list">
+
+            <?php foreach($actors as $actor) { ?>
+
+                <li>
+                    <a href="./?action=detailsPerson&id=<?= $actor["id_person"]?>">
+                        <img src="<?= $actor["profile_url"] ?>" alt="<?= "Profile picture of". $actor["full_name"] ?>">
+                        <span> <?= $actor["full_name"] ?> </span>
+                    </a>
+                </li>
+                
+            <?php } ?>
+
         </ul>
-        <a href="#" class="discover-more">
-            <span>Découvrir d'autres acteurs</span>
+        <a href="./?action=listActors" class="discover-more">
+            <span>Discover more actors</span>
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Directors -->
+    <div class="directors persons hidden">
+        <div class="title_section">
+            <h3>Directors </h3>
+            <i class="fa-solid fa-repeat switch-persons"></i>
+        </div>
+        <ul class="directors-list persons-list">
+            <?php foreach($directors as $director) { ?>
+
+                <li>
+                    <a href="./?action=detailsPerson&id=<?= $director["id_person"]?>">
+                        <img src="<?= $director["profile_url"] ?>" alt="<?= "Profile picture of". $director["full_name"] ?>">
+                        <span> <?= $director["full_name"] ?> </span>
+                    </a>
+                </li>
+
+            <?php } ?>
+        </ul>
+        <a href="./?action=listDirectors" class="discover-more">
+            <span>Discover more directors</span>
             <i class="fa-solid fa-arrow-right"></i>
         </a>
     </div>

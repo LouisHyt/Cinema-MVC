@@ -24,7 +24,31 @@
     color: #ff6b00;
 }
 
-.navigation h3, .actors h3 {
+.title_section {
+    color: var(--discrete-clr);
+    font-size: 14px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    display: grid;
+    grid-template-columns: 85px auto;
+    align-items: center;
+    gap: 15px;
+
+    & > h3 {
+        font-size: 14px;
+    }
+
+    & > .switch-persons {
+        transition: color 200ms linear;
+        cursor: pointer;
+    }
+
+    & > .switch-persons:hover{
+        color: rgb(158, 158, 158);
+    }
+}
+
+.navigation h3{
     color: var(--discrete-clr);
     font-size: 14px;
     margin-bottom: 30px;
@@ -65,29 +89,43 @@
     font-size: 18px;
 }
 
-.actors {
+.persons {
     margin-top: 30px;
 }
 
-.actors-list {
+.persons-list {
     list-style: none;
     padding: 0;
 }
 
-.actors-list li {
+.persons-list li {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
     padding: 5px;
     border-radius: 8px;
     transition: background-color 0.3s;
+
+    & > a {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
+
+    & > a > span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 150px;
+    }
 }
 
-.actors-list li:hover {
+.persons-list li:hover {
     background-color: #333;
 }
 
-.actors-list img {
+.persons-list img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -95,16 +133,19 @@
     object-fit: cover;
 }
 
-.actors-list span {
+.persons-list span {
     color: rgb(155, 155, 155);
 }
 
 .discover-more {
+    display: block;
     color: var(--discrete-clr);
     font-size: 13px;
-    margin-top: 15px;
+    margin-top: 25px;
     gap: 5px;
     transition: color 0.3s;
+    width: 100%;
+    text-align: center;
 
     & > i {
         vertical-align: bottom;
@@ -114,4 +155,8 @@
 
 .discover-more:hover {
     color: #ff6b00;
+}
+
+.persons.hidden {
+    display: none;
 }
