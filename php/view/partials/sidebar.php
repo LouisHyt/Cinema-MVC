@@ -5,50 +5,49 @@
     $persons = Utils::getPersons();
     $actors = $persons["actors"];
     $directors = $persons["directors"];
+
+    $activeLink = isset($_GET["filter"]) ? $_GET["filter"] : null;
     
 ?>
 
 
-
-<link rel="stylesheet" href="public/css/sidebar.css">
 <script src="public/js/sidebar.js" defer></script>
-
 <aside id="sidebar">
 
     <div class="logo">
-        <span class="cine">CINE</span><span class="plus">PLUS</span>
+        <a href="./"><span class="cine">CINE</span><span class="plus">PLUS</span></a>
     </div>
     <div class="navigation">
         <h3>Navigation</h3>
         <ul class="nav-links">
             <li>
-                <a href="#" class="active">
+                <a href="./?action=listMovies" class="<?= !$activeLink ? "active" : "" ?>">
                     <i class="fas fa-film"></i>
-                    <span>Parcourir</span>
+                    <span>Browse</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="./?action=listMovies&filter=new" class="<?= $activeLink == "new" ? "active" : "" ?>">
                     <i class="fas fa-clock"></i>
-                    <span>Nouveautés</span>
+                    <span>New</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="./?action=listMovies&filter=popularity" class="<?= $activeLink == "popularity" ? "active" : "" ?>">
                     <i class="fas fa-fire"></i>
-                    <span>Populaires</span>
+                    <span>Popular</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="./?action=listMovies&filter=notation" class="<?= $activeLink == "notation" ? "active" : "" ?>">
                     <i class="fas fa-star"></i>
-                    <span>Mieux notés</span>
+                    <span>Best notation</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="">
                     <i class="fas fa-list"></i>
-                    <span>Catégories</span>
+                    <span>Categories</span>
                 </a>
             </li>
         </ul>

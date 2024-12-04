@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="public/css/navbar.css">
 <nav id="navbar">
     <div class="search-container">
         <input type="text" class="search-input" placeholder="Rechercher un film">

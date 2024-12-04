@@ -4,14 +4,6 @@
     --accent-clr: #FF6500;
     --discrete-clr: #5B5B5B;
     --background-clr: #100F12;
-
-    --angle: 90deg;
-}
-
-@property --angle {
-    syntax: '<angle>';
-    initial-value: 0deg;
-    inherits: false;
 }
 
 @layer reset {
