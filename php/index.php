@@ -10,7 +10,7 @@
     });
 
     $ctrlHomePage = new homePageController();
-    $ctrlFilm = new MovieController();
+    $ctrlMovie = new MovieController();
     $ctrlPerson = new PersonController();
     $ctrlApi = new ApiController();
 
@@ -21,13 +21,13 @@
         switch($_GET["action"]) {
             case "listMovies" :
                  if($filter != null){
-                     $ctrlFilm->listMovies();
+                     $ctrlMovie->listMovies();
                  } else {
                     $ctrlHomePage->homePage();
                  }
             break;
             case "detailsMovie" : 
-                $ctrlFilm->detailsMovie($id);
+                $ctrlMovie->detailsMovie($id);
             break;
             case "listActors" :
                 $ctrlPerson->listActors();
@@ -37,6 +37,9 @@
             break;
             case "detailsPerson" :
                 $ctrlPerson->detailsPerson($id);
+            break;
+            case "categories" : 
+                $ctrlMovie->listMoviesBycategory($id);
             break;
         }
     } else if(isset($_GET["api"])){

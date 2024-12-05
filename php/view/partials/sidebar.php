@@ -45,7 +45,7 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="./?action=categories">
                     <i class="fas fa-list"></i>
                     <span>Categories</span>
                 </a>

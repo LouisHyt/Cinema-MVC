@@ -69,4 +69,22 @@
 
             return $data;
         }
+
+        public function getMoviesByCategory($id) {
+            $id = $id == null ? 1 : $id;
+            $pdo = Connect::seConnecter();
+            $request = $pdo->prepare("
+                SELECT mo.title, mo.poster_image
+                FROM movie mo
+                INNER JOIN belongs be ON mo.id_movie = be.id_movie
+                INNER JOIN category ca ON be.id_category = ca.id_category
+                WHERE ca.id_category = :id
+            ");
+            $request->bindValue(":id", $id, \PDO::PARAM_INT);
+            $request->execute();
+            $movies = $request->fetchAll(\PDO::FETCH_ASSOC);
+            return $movies;
+
+        }
+        
     }

@@ -17,4 +17,10 @@
             $movieDetails = $movieManager->getMovieById($id);
             require "view/detailsMovie.php";
         }
+
+        public function listMoviesBycategory($id){
+            $movieManager = new MovieManager();
+            $movies = $movieManager->getMoviesByCategory($id);
+            require "view/categoriesMovies.php";
+        }
     }

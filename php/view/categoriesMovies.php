@@ -1,12 +1,11 @@
 <?php ob_start(); 
 
-    // var_dump($personDetails);
-    // die;
+    var_dump($movies);
+    die;
 
 ?>
 
-<link rel="stylesheet" href="public/css/detailsPerson.css">
-<div class="person-details">
+<div class="categrories-movies">
     
 </div>
 
