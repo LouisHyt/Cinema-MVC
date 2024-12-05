@@ -111,12 +111,7 @@ Cinema-MVC/
 ```
 
 ## ✨ Démonstration
-### Captures d'écran
-![Liste des tâches](assets/images/tasks-list.png)
-![Ajout d'une tâche](assets/images/add-task.png)
 
-### Version en ligne
-🔗 [Démo en ligne](http://votre-demo.com)
 
 ## 🏆 Compétences visées
 - Développer une application web complète
@@ -127,5 +122,5 @@ Cinema-MVC/
 
 ---
 Exercice réalisé dans le cadre de la formation Développeur Web Full Stack au sein d'Elan Formation
-📅 Date : Novembre/Décembre 2024
-✍️ Auteur : Louis Hayotte
+- 📅 Date : Novembre/Décembre 2024
+- ✍️ Auteur : Louis Hayotte
