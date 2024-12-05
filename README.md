@@ -1,4 +1,4 @@
-# Conception et réalisation d'une application - MVC Cinéma
+# Application MVC Cinéma
 
 ## 📋 Contexte du projet
 Dans le cadre de votre formation en développement web, vous devez créer une application de gestion des données en respectant une architecture MVC. Ce projet permet de mettre en pratique l'interaction entre le frontend et le backend, ainsi que la communication avec une base de donnée.
