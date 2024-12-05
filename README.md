@@ -1,7 +1,7 @@
 # Conception et réalisation d'une application - MVC Cinéma
 
 ## 📋 Contexte du projet
-Dans le cadre de votre formation en développement web, vous devez créer une application de gestion de tâches (TodoList). Ce projet permet de mettre en pratique l'interaction entre le frontend et le backend, ainsi que la gestion des données en base de données.
+Dans le cadre de votre formation en développement web, vous devez créer une application de gestion des données en respectant une architecture MVC. Ce projet permet de mettre en pratique l'interaction entre le frontend et le backend, ainsi que la communication avec une base de donnée.
 
 ## 🎯 Objectifs pédagogiques
 - Structurer les données en réalisant un MCD 
@@ -84,22 +84,18 @@ Dans le cadre de votre formation en développement web, vous devez créer une ap
 ## 📦 Installation et configuration
 ```bash
 # Cloner le repository
-git clone https://github.com/votre-username/todolist.git
-cd todolist
+git clone https://github.com/LouisHyt/Cinema-MVC.git
+cd Cinema-MVC
 
 # Configuration de la base de données
-1. Démarrer XAMPP (Apache et MySQL)
-2. Accéder à PhpMyAdmin (http://localhost/phpmyadmin)
-3. Créer une nouvelle base de données 'todolist_db'
-4. Importer le fichier database/todolist.sql
+1. Démarrer Laragon (Apache et MySQL)
+2. Accéder à HeidiSQL
+3. Créer une nouvelle base de données 'cinema'
+4. Importer le fichier sql/bdd_cinema.sql
 
 # Configuration du projet
-1. Copier config.example.php vers config.php
-2. Modifier les informations de connexion dans config.php :
-   define('DB_HOST', 'localhost');
-   define('DB_NAME', 'todolist_db');
-   define('DB_USER', 'root');
-   define('DB_PASS', '');
+1. Modifier les informations de connexion dans model/connect.php:
+   
 ```
 
 ## 🚀 Structure du projet
@@ -140,24 +136,6 @@ Cinema-MVC/
 
 ### Version en ligne
 🔗 [Démo en ligne](http://votre-demo.com)
-
-## 📚 Ressources
-### Documentation officielle
-- [MDN - JavaScript](https://developer.mozilla.org/fr/docs/Web/JavaScript)
-- [PHP.net](https://www.php.net/manual/fr/)
-- [W3Schools SQL](https://www.w3schools.com/sql/)
-
-### Supports de cours
-- Chapitre 5 : POO en PHP
-- Chapitre 7 : Architecture MVC
-- Chapitre 8 : API Fetch et AJAX
-
-## ⚡ Points d'attention
-- Valider TOUTES les données utilisateur
-- Utiliser des requêtes préparées pour éviter les injections SQL
-- Gérer les erreurs et exceptions
-- Vérifier la compatibilité navigateur des fonctionnalités JS
-- Optimiser les requêtes SQL (INDEX, LIMIT)
 
 ## 🏆 Compétences visées
 - Développer une application web complète
