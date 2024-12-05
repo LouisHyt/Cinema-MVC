@@ -56,7 +56,7 @@
     <!-- Actors -->
     <div class="actors persons">
         <div class="title_section">
-            <h3>Acteurs</h3>
+            <h3>Actors</h3>
             <i class="fa-solid fa-repeat switch-persons"></i>
         </div>
         <ul class="actors-list persons-list">

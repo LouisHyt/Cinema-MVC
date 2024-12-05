@@ -1,3 +1,8 @@
+<?php 
+
+?>
+
+<script src="public/js/navbar.js" defer></script>
 <nav id="navbar">
     <div class="search-container">
         <input type="text" class="search-input" placeholder="Rechercher un film">

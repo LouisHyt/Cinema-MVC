@@ -2,6 +2,7 @@
     display: grid;
     height: 100%;
     grid-template-rows: 45vh 1fr;
+    color: white;
 }
 
 
@@ -9,21 +10,15 @@
     width: 100%;
     overflow: hidden;
     position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 
-    & > figure{
-        position: relative;
-
-        &::before{
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(64deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.75) 40%, transparent 60%);
-        }
-
-        img{
-            width: 100%;
-            object-fit: cover;
-        }
+    &::before{
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(64deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.75) 40%, transparent 60%);
     }
 
     .movie-infos{
@@ -31,7 +26,6 @@
         top: 0;
         padding: 4rem;
         max-width: 600px;
-        color: white;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -52,7 +46,7 @@
         gap: 1.5rem;
         margin-top: 25px;
 
-        button{
+        a{
             padding: 0.7rem 1.75rem;
             border: none;
             border-radius: 35px;
@@ -77,4 +71,66 @@
 
 .movies-recommendations{
     background-color: var(--background-clr);
+    overflow-x: hidden;
+    position: relative;
+    padding: 1rem;
+
+    & > h3 {
+        margin-top: 1.5rem;
+        margin-bottom: 3rem;
+        padding-left: 2rem;
+    }
+
+    &  > .slide-next{
+        position: absolute;
+        bottom: 50%;
+        right: 125px;
+        transform: translateY(65%);
+        font-size: 5rem;
+        color: rgba(255, 255, 255, 0.582);
+        cursor: pointer;
+    }
+
+    & > .slider{
+        width: 100%;
+        margin-top: 2rem;
+        padding-block: 1rem;
+        padding-left: 1.5rem;
+        display: flex;
+        gap: 2rem;
+        mask: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 75%, transparent 100%);
+    }
+
+
+    .movie-card{
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 200px;
+        gap: 20px;
+        cursor: pointer;
+        transition: 200ms ease-in-out;
+
+        & > h4 {
+            font-size: 0.85rem;
+            font-weight: semibold;
+        }
+
+        & > figure{
+            width: 100%;
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        & img{
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+    
+    .movie-card:hover{
+        transform: scale(1.1);
+    }
 }

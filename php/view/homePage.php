@@ -4,25 +4,34 @@
     $movies = array_slice($recommendations, 1); 
 ?>
 <link rel="stylesheet" href="public/css/homePage.css">
+<script src="public/js/homePage.js" defer></script>
 <div class="home-page">
-    <section class="front-movie">
-        <figure>
-            <img src="<?= $frontMovie['banner_image'] ?>" alt="banner of the movie <?= $frontMovie['title'] ?>">
-        </figure>
+    <section class="front-movie" style="background-image: url('<?= $frontMovie['banner_image'] ?>')">
         <div class="movie-infos">
             <h2 class="movie-title"><?= $frontMovie['title'] ?></h2>
             <p class="movie-synopsis"><?= $frontMovie['synopsis'] ?></p>
             <div class="buttons-group">
-                <button class="watch-button">Watch</button>
-                <button class="details-button">
+                <a class="watch-button">Watch</a>
+                <a class="details-button" href="./?action=detailsMovie&id=<?= $frontMovie['id_movie']?>">
                     <span>Details</span>
                     <i class="fa-solid fa-chevron-right"></i>
-                </button>
+                </a>
             </div>
         </div>
     </section>
     <section class="movies-recommendations">
-     
+     <h3>Our Recommendations : </h3>
+     <div class="slider">
+        <?php foreach ($movies as $movie) : ?>
+            <article class="movie-card" data-id="<?= $movie['id_movie'] ?>">
+                <figure>
+                    <img src="<?= $movie['poster_image'] ?>" alt="poster of the movie <?= $movie['title'] ?>">
+                </figure>
+                <h4 class="movie-title"><?= $movie['title'] ?></h4>
+        </article>
+        <?php endforeach; ?>
+     </div>
+     <i class="fa-solid fa-chevron-right slide-next"></i>
     </section>
 </div>
 

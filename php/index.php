@@ -3,7 +3,7 @@
     use Controller\homePageController;
     use Controller\MovieController;
     use Controller\PersonController;
-    use Model\Manager\HomePageManager;
+    use Controller\ApiController;
 
     spl_autoload_register(function($class_name){
         include "$class_name.php";
@@ -12,6 +12,7 @@
     $ctrlHomePage = new homePageController();
     $ctrlFilm = new MovieController();
     $ctrlPerson = new PersonController();
+    $ctrlApi = new ApiController();
 
     $id = isset($_GET["id"]) ? $_GET["id"] : null;
     $filter = isset($_GET["filter"]) ? $_GET["filter"] : null;
@@ -38,7 +39,14 @@
                 $ctrlPerson->detailsPerson($id);
             break;
         }
-    } else {
+    } else if(isset($_GET["api"])){
+        switch($_GET["api"]) {
+            case "searchMoviesByName":
+                $ctrlApi->searchMoviesByName();
+            break;
+        }
+    }
+    else {
         $ctrlCinema->homePage();
     }
 

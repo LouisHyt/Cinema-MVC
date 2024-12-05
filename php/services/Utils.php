@@ -27,9 +27,20 @@
                 "directors" => $directors
             ];
         }
+
+        public static function getMoviesByName(string $name)
+        {
+            $pdo = Connect::seConnecter();
+            $request = $pdo->prepare("
+                SELECT title, id_movie 
+                FROM movie
+                WHERE title LIKE %:name%
+            ");
+            $request->bindParam("name", $name, \PDO::PARAM_STR);
+            $request->execute();
+            return $request->fetchAll(\PDO::FETCH_ASSOC);
+
+        }
     }
-
-
-
 
 ?>
