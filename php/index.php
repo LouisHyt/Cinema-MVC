@@ -47,7 +47,7 @@
         }
     }
     else {
-        $ctrlCinema->homePage();
+        $ctrlHomePage->homePage();
     }
 
 ?>
