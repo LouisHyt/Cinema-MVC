@@ -1,0 +1,80 @@
+.home-page{
+    display: grid;
+    height: 100%;
+    grid-template-rows: 45vh 1fr;
+}
+
+
+.front-movie{
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+
+    & > figure{
+        position: relative;
+
+        &::before{
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(64deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.75) 40%, transparent 60%);
+        }
+
+        img{
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .movie-infos{
+        position: absolute;
+        top: 0;
+        padding: 4rem;
+        max-width: 600px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .movie-infos > .movie-title{
+        font-size: 3.5rem;
+    }
+
+    .movie-infos > .movie-synopsis{
+        font-size: 1rem;
+        color: rgb(196, 196, 196);
+    }
+
+    .movie-infos > .buttons-group{
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 25px;
+
+        button{
+            padding: 0.7rem 1.75rem;
+            border: none;
+            border-radius: 35px;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .watch-button{
+            background-color: var(--accent-clr);
+        }
+
+        .details-button{
+            background-color: #100F12;
+            display: inline-flex;
+            gap: 10px;
+        }
+
+    }
+}
+
+.movies-recommendations{
+    background-color: var(--background-clr);
+}

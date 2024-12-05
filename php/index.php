@@ -1,23 +1,29 @@
 <?php
 
-    use Controller\CinemaController;
+    use Controller\homePageController;
     use Controller\MovieController;
     use Controller\PersonController;
+    use Model\Manager\HomePageManager;
 
     spl_autoload_register(function($class_name){
         include "$class_name.php";
     });
 
-    $ctrlCinema = new CinemaController();
+    $ctrlHomePage = new homePageController();
     $ctrlFilm = new MovieController();
     $ctrlPerson = new PersonController();
 
     $id = isset($_GET["id"]) ? $_GET["id"] : null;
+    $filter = isset($_GET["filter"]) ? $_GET["filter"] : null;
 
     if(isset($_GET["action"])){
         switch($_GET["action"]) {
-            case "listMovies" : 
-                $ctrlFilm->listMovies();
+            case "listMovies" :
+                 if($filter != null){
+                     $ctrlFilm->listMovies();
+                 } else {
+                    $ctrlHomePage->homePage();
+                 }
             break;
             case "detailsMovie" : 
                 $ctrlFilm->detailsMovie($id);

@@ -4,8 +4,6 @@
 
 <?php
 
-var_dump($movies);
-
 $title = "Liste des films";
 $content = ob_get_clean();
 $metadesc = "Display all the movies available";

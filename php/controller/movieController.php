@@ -1,7 +1,6 @@
 <?php
 
     namespace Controller;
-    use Model\Connect;
     use Model\Manager\MovieManager;
 
     class MovieController {

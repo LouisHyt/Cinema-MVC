@@ -4,6 +4,7 @@
     --accent-clr: #FF6500;
     --discrete-clr: #5B5B5B;
     --background-clr: #100F12;
+    --border-clr: rgb(43, 43, 43);
 }
 
 @layer reset {
@@ -50,5 +51,4 @@ body {
 
 #content{
     grid-area: main;
-    padding: 1em;
 }
