@@ -3,7 +3,8 @@
 ## 📋 Contexte du projet
 Dans le cadre de votre formation en développement web, vous devez créer une application de gestion des données en respectant une architecture MVC. Ce projet permet de mettre en pratique l'interaction entre le frontend et le backend, ainsi que la communication avec une base de donnée.
 
-## 🎯 Objectifs & Consignes
+## 🎯 Objectifs pédagogiques
+### Consignes
 - Structurer les données en réalisant un MCD 
 - Créer et remplir une base de donnée en conséquence
 - Écrire diverses requêtes SQL pour s'assurer de la cohérence de la base de donnée
