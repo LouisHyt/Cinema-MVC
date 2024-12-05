@@ -1,6 +1,6 @@
 <?php
 
-    use Controller\homePageController;
+    use Controller\HomePageController;
     use Controller\MovieController;
     use Controller\PersonController;
     use Controller\ApiController;
@@ -9,7 +9,7 @@
         include "$class_name.php";
     });
 
-    $ctrlHomePage = new homePageController();
+    $ctrlHomePage = new HomePageController();
     $ctrlMovie = new MovieController();
     $ctrlPerson = new PersonController();
     $ctrlApi = new ApiController();
