@@ -10,30 +10,77 @@
     position: relative;
     flex: 1;
     max-width: 300px;
-}
 
-.search-input {
-    width: 100%;
-    padding: 0.75rem 2.5rem 0.75rem 1rem;
-    border-radius: 20px;
-    border: none;
-    background-color: #1a1a1a;
-    color: #fff;
-    font-size: 0.9rem;
-}
+    & > .search-input {
+        width: 100%;
+        padding: 0.75rem 2.5rem 0.75rem 1rem;
+        border-radius: 20px;
+        border: none;
+        background-color: #1a1a1a;
+        color: #fff;
+        font-size: 0.9rem;
 
-.search-input::placeholder {
-    color: #666;
-}
+        &::placeholder {
+            color: #666;
+        }
+    }
 
-.search-icon {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #666;
-}
+    & > .search-icon {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+    }
 
+    & > .search-results {
+        position: absolute;
+        left: 0;
+        top: calc(100% + 0.5rem);
+        width: 100%;
+        max-height: 200px;
+        background-color: #1a1a1a;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        z-index: 99;
+        display: none;
+        flex-direction: column;
+        overflow-y: auto;
+    }
+
+    & > .search-results::-webkit-scrollbar {
+        background: transparent;
+        width: 5px;
+    }
+
+    & > ::-webkit-scrollbar-thumb {
+        background: #303030;
+        border-radius: 5px;
+    }
+
+    &:focus-within > .search-results:not(:empty) {
+        display: flex;
+    }
+
+    .suggestion {
+        color: white;
+        text-overflow: ellipsis;
+        overflow-x: clip;
+        text-wrap: nowrap;
+        white-space: nowrap;
+        padding-block: 1rem;
+        padding-left: 1rem;
+        max-width: 100%;
+
+        &:hover{
+            background-color: rgb(46, 46, 46);
+        }
+
+        &:not(:last-child){
+            border-bottom: 1px solid var(--border-clr);
+        }
+    }
+}
 .nav-icons {
     display: flex;
     gap: 1.5rem;

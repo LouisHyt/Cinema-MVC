@@ -7,6 +7,7 @@
     <div class="search-container">
         <input type="text" class="search-input" placeholder="Rechercher un film">
         <i class="fas fa-search search-icon"></i>
+        <div class="search-results"></div>
     </div>
     <div class="nav-icons">
         <a href="#" class="nav-icon">
