@@ -108,30 +108,19 @@ Cinema-MVC/
 │
 ├── app/
 │   ├── controller/
-│   │   ├── ApiController.php
-│   │   ├── HomePageController.php
-│   │   ├── MovieController.php
-│   │   └── PersonController.php
+│   │   └── ...
 │   │
 │   ├── model/
 │   │    ├── manager/
-│   │    │   ├── ApiManager.php
-│   │    │   ├── HomePageManager.php
-│   │    │   ├── movieManager.php
-│   │    │   └── PersonManager.php
-│   │    └── connect.php
+│   │    │   └── ...
+│   │    └── ...
 │   │
 │   ├── public/
 │   │    ├── css/
-│   │    │   ├── detailsMovie.css
-│   │    │   ├── detailsPerson.css
-│   │    │   ├── homePage.css
-│   │    │   ├── navbar.css
-│   │    │   ├── sidebar.css
-│   │    │   └── style.css
+│   │    │   └── ...
 │   │    │
 │   │    └── js/
-│
+│            └── ...
 ├── figma/
 │
 ├── mcd/
