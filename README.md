@@ -3,32 +3,12 @@
 ## 📋 Contexte du projet
 Dans le cadre de votre formation en développement web, vous devez créer une application de gestion des données en respectant une architecture MVC. Ce projet permet de mettre en pratique l'interaction entre le frontend et le backend, ainsi que la communication avec une base de donnée.
 
-## 🎯 Objectifs pédagogiques
+## 🎯 Objectifs & Consignes
 - Structurer les données en réalisant un MCD 
 - Créer et remplir une base de donnée en conséquence
 - Écrire diverses requêtes SQL pour s'assurer de la cohérence de la base de donnée
 - Réaliser un mockup et des wireframes de l'application pour les vues principales
 - Concevoir l'application web en PHP en respectant une architecture Modèles/Vues/Controlleurs
-
-## 📝 Consignes
-### Fonctionnalités attendues
-1. Affichage de la liste des tâches
-   - Titre de la tâche
-   - Description
-   - Date d'échéance
-   - Statut (À faire, En cours, Terminé)
-   - Priorité (Haute, Moyenne, Basse)
-
-2. Gestion des tâches
-   - Ajouter une nouvelle tâche
-   - Modifier une tâche existante
-   - Supprimer une tâche
-   - Marquer une tâche comme terminée
-
-3. Filtres et tri
-   - Filtrer par statut
-   - Trier par date d'échéance
-   - Trier par priorité
 
 ### Critères de performance
 - Code structuré selon le pattern MVC
