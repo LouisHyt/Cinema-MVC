@@ -9,12 +9,12 @@
         {
             $pdo = Connect::seConnecter();
             $request = $pdo->query("
-                SELECT pe.id_person, CONCAT(pe.first_name, ' ', pe.last_name) AS full_name, pe.profile_url
+                SELECT pe.id_person, CONCAT(pe.first_name, ' ', pe.last_name) AS full_name, pe.profile_image
                 FROM person pe
                 INNER JOIN actor ac ON pe.id_person = ac.id_person
                 LIMIT 5
             ;
-                SELECT pe.id_person, CONCAT(pe.first_name, ' ', pe.last_name) AS full_name, pe.profile_url
+                SELECT pe.id_person, CONCAT(pe.first_name, ' ', pe.last_name) AS full_name, pe.profile_image
                 FROM person pe
                 INNER JOIN director di ON pe.id_person = di.id_person
                  LIMIT 5
@@ -40,6 +40,11 @@
             $request->execute();
             return $request->fetchAll(\PDO::FETCH_ASSOC);
 
+        }
+
+        public static function formatDuration(int $duration)
+        {
+            return intdiv($duration, 60).'h'. ($duration % 60);
         }
     }
 

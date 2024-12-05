@@ -19,7 +19,7 @@
 
         public function detailsPerson(int $id) {
             $personManager = new PersonManager();
-            $person = $personManager->getPersonById($id);
+            $personDetails = $personManager->getPersonById($id);
             require "view/detailsPerson.php";
         }
     }

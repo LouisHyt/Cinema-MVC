@@ -65,7 +65,7 @@
 
                 <li>
                     <a href="./?action=detailsPerson&id=<?= $actor["id_person"]?>">
-                        <img src="<?= $actor["profile_url"] ?>" alt="<?= "Profile picture of". $actor["full_name"] ?>">
+                        <img src="<?= $actor["profile_image"] ?>" alt="<?= "Profile picture of". $actor["full_name"] ?>">
                         <span> <?= $actor["full_name"] ?> </span>
                     </a>
                 </li>
@@ -90,7 +90,7 @@
 
                 <li>
                     <a href="./?action=detailsPerson&id=<?= $director["id_person"]?>">
-                        <img src="<?= $director["profile_url"] ?>" alt="<?= "Profile picture of". $director["full_name"] ?>">
+                        <img src="<?= $director["profile_image"] ?>" alt="<?= "Profile picture of". $director["full_name"] ?>">
                         <span> <?= $director["full_name"] ?> </span>
                     </a>
                 </li>

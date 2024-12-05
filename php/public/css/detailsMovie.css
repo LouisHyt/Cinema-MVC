@@ -1,0 +1,131 @@
+.movie-details {
+    display: grid;
+    height: 100%;
+    grid-template-rows: 45vh 1fr;
+    color: white;
+    background-color: var(--background-secondary-clr);
+    padding: 3rem;
+    gap: 3rem;
+}
+
+.movie-infos {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+
+    .movie-poster{
+        border-radius: 10px;
+        overflow: hidden;
+
+        & > img {
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .movie-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding-block: 1rem;
+    }
+
+    .movie-content > h2 {
+        font-size: 2rem;
+    }
+
+    .movie-content > .categories {
+        display: flex;
+        gap: 1rem;
+
+        & > span {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            background-color: rgba(0, 0, 0, 0.678);
+        }
+    }
+
+    .movie-content > .stats{
+        display: flex;
+        gap: 2rem;
+        font-size: 0.9rem;
+        color: rgb(214, 214, 214);
+
+        & > div {
+            display: inline-flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .fa-star{
+            color: rgb(238, 216, 21);
+        }
+    }
+
+    .movie-content > .movie-synopsis{
+
+        margin-top: 20px;
+        max-width: 50vw;
+        
+        pre {
+            font-family: inherit;
+            text-wrap: wrap;
+            line-height: 1.5;
+        }
+    }
+}
+
+.casting-infos{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+    
+.casting-infos > .actor-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+}
+
+.actor-wrapper > .actor-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform 250ms;
+
+    &:hover{
+        transform: scale(1.025);
+    }
+
+    & > .actor-image{
+        width: 120px;
+        aspect-ratio: 1;
+        border-radius: 100vw;
+        overflow: hidden;
+    }
+
+    & > .actor-name{
+        text-align: center;
+    }
+
+    & > .actor-role{
+        color: rgb(184, 184, 184);
+        text-align: center;
+        font-size: 0.9rem;
+        font-style: italic;
+    }
+
+
+    & > .actor-image > img {
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+

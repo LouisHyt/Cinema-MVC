@@ -14,7 +14,7 @@
 
         public function detailsMovie(int $id) {
             $movieManager = new MovieManager();
-            $movie = $movieManager->getMovieById($id);
+            $movieDetails = $movieManager->getMovieById($id);
             require "view/detailsMovie.php";
         }
     }

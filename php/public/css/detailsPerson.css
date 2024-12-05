@@ -1,0 +1,11 @@
+.person-details {
+    display: grid;
+    height: 100%;
+    grid-template-rows: 45vh 1fr;
+    color: white;
+    background-color: var(--background-secondary-clr);
+    padding: 3rem;
+    gap: 3rem;
+}
+
+

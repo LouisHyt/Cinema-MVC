@@ -1,13 +1,21 @@
-<?php ob_start(); ?>
+<?php ob_start(); 
 
-<h1>Details Person</h1>
+    var_dump($personDetails);
+    die;
 
-<p><?= $person["full_name"] ?></p>
+?>
+
+<link rel="stylesheet" href="public/css/detailsPerson.css">
+<div class="person-details">
+    
+</div>
 
 <?php
 
-$title = "Details : " . $person["full_name"];
+$title = "";
 $content = ob_get_clean();
-$metadesc = "Description page for the actor ";
+$metadesc = "";
 
 require 'view/template.php';
+
+?>

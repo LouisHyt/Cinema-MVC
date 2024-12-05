@@ -15,7 +15,7 @@
             ");
             $request->bindValue(":name", "%$name%", \PDO::PARAM_STR);
             $request->execute();
-            $movies = $request->fetchAll();
+            $movies = $request->fetchAll(\PDO::FETCH_ASSOC);
             return $movies;
            
         }

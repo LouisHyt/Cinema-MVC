@@ -15,7 +15,7 @@
                 ORDER BY note DESC
                 LIMIT 15
             ");
-            $recommendations = $request->fetchAll();
+            $recommendations = $request->fetchAll(\PDO::FETCH_ASSOC);
             return $recommendations;
         }
     }
