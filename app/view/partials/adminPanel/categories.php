@@ -10,12 +10,16 @@ if (!empty($data['entity_data'])) : ?>
         </thead>
         <tbody>
             <?php foreach ($data['entity_data'] as $category) : ?>
-                <tr data-name="<?= $category["label"] ?>">
+                <tr 
+                    data-id="<?= $category["id_category"] ?>" 
+                    data-name="<?= $category["label"] ?>"
+                    data-entity="<?= $data["entity"] ?>"
+                >
                     <td><?= $category["label"] ?></td>
                     <td><?= $category["movies_in"] ?></td>
                     <td>
-                        <a href="" class="action edit">Edit</a>
-                        <a href="" class="action delete">Delete</a>
+                        <button type="button" class="action edit">Edit</button>
+                        <button type="button" class="action delete">Delete</button>
                     </td>
                 </tr>
             <?php endforeach; ?>

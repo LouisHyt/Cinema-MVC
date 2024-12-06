@@ -22,6 +22,8 @@
 
     if(isset($_GET["action"])){
         switch($_GET["action"]) {
+
+            //Views
             case "listMovies" :
                  if($filter != null){
                      $ctrlMovie->listMovies();
@@ -51,11 +53,22 @@
                     $ctrlHomePage->homePage();
                }
             break;
+
+            //CRUD
         }
     } else if(isset($_GET["api"])){
         switch($_GET["api"]) {
             case "searchMoviesByName":
                 $ctrlApi->searchMoviesByName();
+            break;
+            case "deleteCategory":
+                $ctrlApi->deleteCategory();
+            break;
+            case "deleteMovie":
+                $ctrlApi->deleteMovie();
+            break;
+            case "deletePerson":
+                $ctrlApi->deletePerson();
             break;
         }
     }

@@ -194,22 +194,28 @@ body{
         padding: 1rem;
         border-bottom: 1px solid var(--border-clr);
         vertical-align: middle;
+
+        & > .no-value {
+            color: #838383;
+            font-style: italic;
+        }
     }
     
     .table tbody tr:hover {
         background-color: rgba(255, 101, 0, 0.1);
     }
 
-    a.action{
+    button.action{
         padding: 0.5rem 1rem;
         border-radius: 4px;
         font-weight: 500;
         transition: all 0.3s ease;
         margin: 0 0.25rem;
         font-size: 0.85rem;
+        cursor: pointer;
     }
 
-    a.edit{
+    button.edit{
         background-color: #ffc107;
         color: black;
         border: none;
@@ -219,7 +225,7 @@ body{
         }
     }
 
-    a.delete{
+    button.delete{
         background-color: #dc3545;
         color: white;
         border: none;

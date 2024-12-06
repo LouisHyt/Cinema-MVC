@@ -20,15 +20,15 @@
                     CONCAT(pe.first_name, ' ', pe.last_name) as director_name,
                     mo.id_movie
                 FROM movie mo
-                INNER JOIN director di ON mo.id_director = di.id_director 
-                INNER JOIN person pe ON di.id_person = pe.id_person
+                LEFT JOIN director di ON mo.id_director = di.id_director 
+                LEFT JOIN person pe ON di.id_person = pe.id_person
             ");
             $movies = $request->fetchAll(\PDO::FETCH_ASSOC);
             return $movies;
         }
 
         // Find a specific movie by id
-        public function getMovieById(int $id) {
+        public function getMovieById($id) {
             $pdo = Connect::seConnecter();
             $requestMovie = $pdo->prepare("
                 SELECT 
@@ -44,10 +44,10 @@
                     GROUP_CONCAT(ca.label) as categories
 
                 FROM movie mo
-                INNER JOIN director di ON mo.id_director = di.id_director 
-                INNER JOIN person pe ON di.id_person = pe.id_person 
-                INNER JOIN belongs be ON mo.id_movie = be.id_movie
-                INNER JOIN category ca ON be.id_category = ca.id_category
+                LEFT JOIN director di ON mo.id_director = di.id_director 
+                LEFT JOIN person pe ON di.id_person = pe.id_person 
+                LEFT JOIN belongs be ON mo.id_movie = be.id_movie
+                LEFT JOIN category ca ON be.id_category = ca.id_category
                 WHERE mo.id_movie = :id
             ");
             $requestMovie->bindValue(":id", $id, \PDO::PARAM_INT);
@@ -119,6 +119,16 @@
             ];
             return $data;
 
+        }
+
+        public function deleteMovie($id) {
+            $pdo = Connect::seConnecter();
+            $request = $pdo->prepare("
+                DELETE FROM movie
+                WHERE id_movie = :id
+            ");
+            $request->bindValue(":id", $id, \PDO::PARAM_INT);
+            $request->execute();
         }
         
     }

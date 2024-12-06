@@ -12,7 +12,7 @@
             require "view/listMovies.php";
         }
 
-        public function detailsMovie(int $id) {
+        public function detailsMovie($id) {
             $movieManager = new MovieManager();
             $movieDetails = $movieManager->getMovieById($id);
             require "view/detailsMovie.php";

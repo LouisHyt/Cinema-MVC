@@ -100,4 +100,14 @@
             return $persons;
         }
 
+        public function deletePerson($id) {
+            $pdo = Connect::seConnecter();
+            $request = $pdo->prepare("
+                DELETE FROM person
+                WHERE id_person = :id
+            ");
+            $request->bindValue(":id", $id, \PDO::PARAM_INT);
+            $request->execute();
+        }
+
     }

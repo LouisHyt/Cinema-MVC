@@ -14,17 +14,23 @@ if (!empty($data['entity_data'])) : ?>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($data['entity_data'] as $movie) : ?>
-                <tr data-name="<?= $movie["title"] ?>">
+            <?php foreach ($data['entity_data'] as $movie) : 
+               $movie["duration"] = Utils::formatDuration($movie["duration"]); 
+            ?>
+                <tr 
+                    data-name="<?= $movie["title"] ?>"
+                    data-entity="<?= $data["entity"] ?>"
+                    data-id="<?= $movie["id_movie"] ?>"
+                >
                     <td><?= $movie["title"] ?></td>
-                    <td><?= $movie["director_name"] ?></td>
+                    <td><?= $movie["director_name"] !== null ? $movie["director_name"] : "<span class='no-value'>Not specified</span>" ?></td>
                     <td><?= $movie["release_date"] ?></td>
-                    <td><?= $movie["duration"] ?> min</td>
+                    <td><?= $movie["duration"] ?>min</td>
                     <td><?= $movie["note"] ?>/5</td>
                     <td class="field-truncate"><?= substr($movie["synopsis"], 0, 100) ?>...</td>
                     <td>
-                        <a href="index.php?action=editMovie&id=<?= $movie["id_movie"] ?>" class="action edit">Edit</a>
-                        <a href="index.php?action=deleteMovie&id=<?= $movie["id_movie"] ?>" class="action delete">Delete</a>
+                        <button type="button" class="action edit">Edit</a>
+                        <button type="button" class="action delete">Delete</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

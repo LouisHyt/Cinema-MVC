@@ -17,7 +17,7 @@
                 SELECT pe.id_person, CONCAT(pe.first_name, ' ', pe.last_name) AS full_name, pe.profile_image
                 FROM person pe
                 INNER JOIN director di ON pe.id_person = di.id_person
-                 LIMIT 5
+                LIMIT 5
             ");
             $actors = $request->fetchAll(\PDO::FETCH_ASSOC);
             $request->nextRowset();

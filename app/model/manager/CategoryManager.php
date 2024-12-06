@@ -27,4 +27,14 @@
         public function addCategory() {
             return null;
         }
+
+        public function deleteCategory(int $id) {
+            $pdo = Connect::seConnecter();
+            $request = $pdo->prepare("
+                DELETE FROM category
+                WHERE id_category = :id
+            ");
+            $request->bindValue(":id", $id, \PDO::PARAM_INT);
+            $request->execute();
+        }
     }
