@@ -2,8 +2,30 @@
 
     namespace Model\Manager;
     use Model\Connect;
+    use Services\Utils;
 
     class PersonManager {
+
+        public function getPersons() {    
+            $pdo = Connect::seConnecter();
+            $request = $pdo->query("
+                SELECT 
+                    pe.id_person,
+                    CONCAT(pe.first_name, ' ', pe.last_name) as full_name,
+                    pe.birth_date,
+                    pe.genre,
+                    pe.death_date,
+                    pe.bio, 
+                    pe.profile_image,
+                    ac.id_actor,
+                    di.id_director
+                FROM person pe
+                LEFT JOIN actor ac ON pe.id_person = ac.id_person
+                LEFT JOIN director di ON pe.id_person = di.id_person
+            ");
+            $persons = $request->fetchAll(\PDO::FETCH_ASSOC);
+            return $persons;
+        }
 
         public function getPersonById(int $id) {
             $pdo = Connect::seConnecter();
@@ -49,16 +71,7 @@
                 $personDetails["directed_movies"] = $request->fetchAll(\PDO::FETCH_ASSOC);
             }
 
-            $jobs = [];
-
-            $personDetails["id_director"] !== null 
-                ? array_push($jobs, "Director") 
-                : null;
-            
-            $personDetails["id_actor"] !== null 
-                ? array_push($jobs, $personDetails["genre"] == "Homme" ? "Actor" : " Actress") 
-                : null;
-
+            $jobs = Utils::getPersonJobs($personDetails);
             $personDetails["jobs"] = $jobs;
 
             return $personDetails;

@@ -10,7 +10,15 @@
 
             $pdo = Connect::seConnecter();
             $request = $pdo->query("
-                SELECT mo.title, mo.release_date, mo.duration, mo.synopsis, mo.note, mo.poster_image, CONCAT(pe.first_name, ' ', pe.last_name) as full_name
+                SELECT 
+                    mo.title, 
+                    mo.release_date, 
+                    mo.duration, 
+                    mo.synopsis, 
+                    mo.note, 
+                    mo.poster_image, 
+                    CONCAT(pe.first_name, ' ', pe.last_name) as director_name,
+                    mo.id_movie
                 FROM movie mo
                 INNER JOIN director di ON mo.id_director = di.id_director 
                 INNER JOIN person pe ON di.id_person = pe.id_person

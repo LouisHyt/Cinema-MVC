@@ -14,7 +14,7 @@
             <i class="fas fa-bell"></i>
             <span class="notifications">2</span>
         </a>
-        <a href="./?action=admin" class="nav-icon">
+        <a href="./?action=admin&entity=movies" class="nav-icon">
             <i class="fas fa-plus"></i>
         </a>
         <a href="#" class="nav-icon">

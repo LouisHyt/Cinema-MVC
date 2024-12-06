@@ -18,6 +18,7 @@
 
     $id = isset($_GET["id"]) ? $_GET["id"] : null;
     $filter = isset($_GET["filter"]) ? $_GET["filter"] : null;
+    $entity = isset($_GET["entity"]) ? $_GET["entity"] : null;
 
     if(isset($_GET["action"])){
         switch($_GET["action"]) {
@@ -43,8 +44,12 @@
             case "categories" : 
                 $ctrlMovie->listMoviesBycategory($id);
             break;
-            case "admin" : 
-                $ctrlAdminPanel->showAdminPanel();
+            case "admin" :
+               if($entity != null && ($entity === "movies" || $entity === "persons" || $entity === "categories")) {
+                   $ctrlAdminPanel->showAdminPanel($entity);
+               } else {
+                    $ctrlHomePage->homePage();
+               }
             break;
         }
     } else if(isset($_GET["api"])){

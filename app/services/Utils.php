@@ -28,17 +28,18 @@
             ];
         }
 
-        public static function getMoviesByName(string $name)
-        {
-            $pdo = Connect::seConnecter();
-            $request = $pdo->prepare("
-                SELECT title, id_movie 
-                FROM movie
-                WHERE title LIKE %:name%
-            ");
-            $request->bindParam("name", $name, \PDO::PARAM_STR);
-            $request->execute();
-            return $request->fetchAll(\PDO::FETCH_ASSOC);
+        public static function getPersonJobs($person) {
+            $jobs = [];
+
+            $person["id_director"] !== null 
+                ? array_push($jobs, "Director") 
+                : null;
+            
+            $person["id_actor"] !== null 
+                ? array_push($jobs, $person["genre"] == "Homme" ? "Actor" : " Actress") 
+                : null;
+
+            return $jobs;
 
         }
 

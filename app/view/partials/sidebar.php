@@ -46,7 +46,7 @@
                 </a>
             </li>
             <li>
-                <a href="./?action=categories&id=1" class="<?= $action == "categories" ? "active" : "" ?>">
+                <a href="./?action=categories" class="<?= $action == "categories" ? "active" : "" ?>">
                     <i class="fas fa-list"></i>
                     <span>Categories</span>
                 </a>

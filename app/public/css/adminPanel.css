@@ -33,46 +33,207 @@
 
 body{
     font-family: Montserrat, sans-serif;
+    background-color: var(--background-secondary-clr);
 }
 
-.back {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    color: #000;
-    margin-bottom: 2rem;
-    font-weight: 500;
-}
-
-.tools {
-    position: fixed;
-    bottom: 50px;
-    left: 50px;
-    display: flex;
-    flex-direction: column;
+.admin-panel {
+    background-color: var(--background-secondary-clr);
+    padding: 2.5rem;
+    color: white;
+    display: grid;
+    height: 100%;
+    grid-template-rows: auto 1fr;
     gap: 2rem;
 }
 
-.btn-edit,
-.btn-add {
-    width: 60px;
-    aspect-ratio: 1;
-    border: none;
-    border-radius: 50%;
-    background-color: #e6e6e6;
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--background-clr);
+    border-radius: 10px;
+}
+
+.select-entity {
+    position: relative;
+    width: max-content;
+
+    .fa-chevron-down {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        font-size: 0.9rem;
+        pointer-events: none;
+        color: #666;
+    }
+
+}
+
+#entity-select {
+    background-color: transparent;
+    color: white;
+    padding: 0.75rem 2.5rem 0.75rem 1rem;
+    border: 1px solid var(--border-clr);
+    border-radius: 25px;
+    font-size: 1rem;
     cursor: pointer;
+    transition: all 200ms ease-in-out;
+    min-width: 200px;
+    appearance: none;
+
+    &:hover{
+        border-color: var(--accent-clr);
+    }
+
+    &:focus{
+        outline: none;
+        border-color: var(--accent-clr);
+        box-shadow: 0 0 0 2px rgba(255, 101, 0, 0.2);
+    }
+
+    & > option{
+        background-color: var(--background-clr);
+        color: white;
+        padding: 10px;
+    }
+}
+
+.actions {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 1.5rem;
 }
 
-.btn-edit:hover,
-.btn-add:hover {
-    background-color: #d9d9d9;
+.search-container {
+    position: relative;
+    flex: 1;
+    max-width: 300px;
+
+
+    .search-input {
+        width: 100%;
+        padding: 0.75rem 2.5rem 0.75rem 1rem;
+        border-radius: 20px;
+        border: 1px solid var(--border-clr);
+        background-color: transparent;
+        color: #fff;
+        font-size: 0.9rem;
+
+        &::placeholder {
+            color: #666;
+        }
+
+        &:focus{
+            outline: none;
+            border-color: var(--accent-clr);
+            box-shadow: 0 0 0 2px rgba(255, 101, 0, 0.2);
+        }
+    }
+
+    .search-icon {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+        pointer-events: none;
+    }
 }
 
-.btn-edit i,
-.btn-add i {
-    font-size: 1.6rem;
-    color: #333;
+.add-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--accent-clr);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 200ms ease-in-out;
+
+    &:hover{
+        background-color: #ff7518;
+    }
+}
+
+
+/* Content */
+
+.admin-content {
+    padding: 2rem;
+    background-color: var(--background-clr);
+    color: white;
+
+    .table {
+        background-color: var(--background-secondary-clr);
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid var(--border-clr);
+        margin-top: 1rem;
+        width: 100%;
+        color: white;
+    }
+    
+    .table thead {
+        background-color: var(--background-clr);
+    }
+    
+    .table th {
+        color: var(--accent-clr);
+        font-weight: 600;
+        padding: 1rem;
+        border-bottom: 2px solid var(--border-clr);
+    }
+    
+    .table td {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-clr);
+        vertical-align: middle;
+    }
+    
+    .table tbody tr:hover {
+        background-color: rgba(255, 101, 0, 0.1);
+    }
+
+    a.action{
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        margin: 0 0.25rem;
+        font-size: 0.85rem;
+    }
+
+    a.edit{
+        background-color: #ffc107;
+        color: black;
+        border: none;
+
+        &:hover{
+            background-color: #ffcd39;
+        }
+    }
+
+    a.delete{
+        background-color: #dc3545;
+        color: white;
+        border: none;
+
+        &:hover{
+            background-color: #e4606d;
+        }
+    }
+    
+    .field-truncate {
+        max-width: 300px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
 }
