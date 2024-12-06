@@ -4,6 +4,7 @@
     use Controller\MovieController;
     use Controller\PersonController;
     use Controller\ApiController;
+    use Controller\AdminPanelController;
 
     spl_autoload_register(function($class_name){
         include "$class_name.php";
@@ -13,6 +14,7 @@
     $ctrlMovie = new MovieController();
     $ctrlPerson = new PersonController();
     $ctrlApi = new ApiController();
+    $ctrlAdminPanel = new AdminPanelController();
 
     $id = isset($_GET["id"]) ? $_GET["id"] : null;
     $filter = isset($_GET["filter"]) ? $_GET["filter"] : null;
@@ -40,6 +42,9 @@
             break;
             case "categories" : 
                 $ctrlMovie->listMoviesBycategory($id);
+            break;
+            case "admin" : 
+                $ctrlAdminPanel->showAdminPanel();
             break;
         }
     } else if(isset($_GET["api"])){

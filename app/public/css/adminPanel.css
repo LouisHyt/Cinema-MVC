@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root{
+    --accent-clr: #FF6500;
+    --discrete-clr: #5B5B5B;
+    --background-clr: #100F12;
+    --background-secondary-clr: rgb(29, 26, 32);
+    --border-clr: rgb(43, 43, 43);
+}
+
+@layer reset {
+
+    :is(*, *::before, *::after){
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    a{
+        text-decoration: none;
+        color: inherit;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+}
+
+body{
+    font-family: Montserrat, sans-serif;
+}
+
+.back {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #000;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+.tools {
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.btn-edit,
+.btn-add {
+    width: 60px;
+    aspect-ratio: 1;
+    border: none;
+    border-radius: 50%;
+    background-color: #e6e6e6;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-edit:hover,
+.btn-add:hover {
+    background-color: #d9d9d9;
+}
+
+.btn-edit i,
+.btn-add i {
+    font-size: 1.6rem;
+    color: #333;
+}

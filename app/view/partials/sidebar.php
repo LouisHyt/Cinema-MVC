@@ -7,6 +7,7 @@
     $directors = $persons["directors"];
 
     $activeLink = isset($_GET["filter"]) ? $_GET["filter"] : null;
+    $action = isset($_GET["action"]) ? $_GET["action"] : null;
     
 ?>
 
@@ -21,7 +22,7 @@
         <h3>Navigation</h3>
         <ul class="nav-links">
             <li>
-                <a href="./?action=listMovies" class="<?= !$activeLink ? "active" : "" ?>">
+                <a href="./?action=listMovies" class="<?= !$activeLink && $action != "categories" ? "active" : "" ?>">
                     <i class="fas fa-film"></i>
                     <span>Browse</span>
                 </a>
@@ -45,7 +46,7 @@
                 </a>
             </li>
             <li>
-                <a href="./?action=categories">
+                <a href="./?action=categories&id=1" class="<?= $action == "categories" ? "active" : "" ?>">
                     <i class="fas fa-list"></i>
                     <span>Categories</span>
                 </a>

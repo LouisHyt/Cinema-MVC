@@ -20,7 +20,7 @@
 
         public function listMoviesBycategory($id){
             $movieManager = new MovieManager();
-            $movies = $movieManager->getMoviesByCategory($id);
+            $data = $movieManager->getMoviesByCategory($id);
             require "view/categoriesMovies.php";
         }
     }

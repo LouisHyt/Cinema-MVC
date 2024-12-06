@@ -5,6 +5,7 @@
 
     class MovieManager {
 
+        // Get all movies
         public function getMovies() {
 
             $pdo = Connect::seConnecter();
@@ -18,6 +19,7 @@
             return $movies;
         }
 
+        // Find a specific movie by id
         public function getMovieById(int $id) {
             $pdo = Connect::seConnecter();
             $requestMovie = $pdo->prepare("
@@ -70,20 +72,44 @@
             return $data;
         }
 
+        //Get movies by category
         public function getMoviesByCategory($id) {
-            $id = $id == null ? 1 : $id;
             $pdo = Connect::seConnecter();
-            $request = $pdo->prepare("
-                SELECT mo.title, mo.poster_image
-                FROM movie mo
-                INNER JOIN belongs be ON mo.id_movie = be.id_movie
-                INNER JOIN category ca ON be.id_category = ca.id_category
-                WHERE ca.id_category = :id
+
+            //Get movies of the selected category
+            if($id !== null){
+                $request = $pdo->prepare("
+                    SELECT mo.title, mo.poster_image, mo.id_movie
+                    FROM movie mo
+                    INNER JOIN belongs be ON mo.id_movie = be.id_movie
+                    INNER JOIN category ca ON be.id_category = ca.id_category
+                    WHERE ca.id_category = :id
+                ");
+                $request->bindValue(":id", $id, \PDO::PARAM_INT);
+                $request->execute();
+                $movies = $request->fetchAll(\PDO::FETCH_ASSOC);
+            } else {
+                $request = $pdo->query("
+                    SELECT DISTINCT mo.title, mo.poster_image, mo.id_movie
+                    FROM movie mo
+                    INNER JOIN belongs be ON mo.id_movie = be.id_movie
+                    INNER JOIN category ca ON be.id_category = ca.id_category
+                ");
+                $movies = $request->fetchAll(\PDO::FETCH_ASSOC);
+            }
+
+            //Get all existing categories
+            $request = $pdo->query("
+                SELECT id_category, label
+                FROM category
             ");
-            $request->bindValue(":id", $id, \PDO::PARAM_INT);
-            $request->execute();
-            $movies = $request->fetchAll(\PDO::FETCH_ASSOC);
-            return $movies;
+            $categories = $request->fetchAll(\PDO::FETCH_ASSOC);
+
+            $data = [
+                "movies" => $movies,
+                "categories" => $categories
+            ];
+            return $data;
 
         }
         

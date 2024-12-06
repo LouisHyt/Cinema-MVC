@@ -1,0 +1,123 @@
+.categories-movies {
+    background-color: var(--background-secondary-clr);
+    padding: 2.5rem;
+    color: white;
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 2rem;
+}
+
+.categories-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.categories-filter {
+    position: relative;
+    width: max-content;
+
+    & > .fa-chevron-down{
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        font-size: 0.9rem;
+    }
+}
+
+#category-select {
+    background-color: var(--background-clr);
+    color: white;
+    padding: 0.75rem 2rem;
+    border: 1px solid var(--border-clr);
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+    min-width: 200px;
+    appearance: none;
+    position: relative;
+
+    &:hover{
+        border-color: var(--accent-clr);
+    }
+
+    &:focus{
+        outline: none;
+        border-color: var(--accent-clr);
+        box-shadow: 0 0 0 2px rgba(255, 101, 0, 0.2);
+    }
+
+    & > option{
+        background-color: var(--background-clr);
+        color: white;
+        padding: 10px;        
+    }
+}
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    gap: 2.5rem;
+    padding: 1.5rem;
+    max-height: 100%;
+    overflow-y: auto;
+    mask: 
+        linear-gradient(0deg, transparent 0%, white 5% 100%);
+        
+}
+
+.movies-grid::-webkit-scrollbar {
+    background: transparent;
+    width: 5px;
+}
+
+.movies-grid::-webkit-scrollbar-thumb {
+    background: #303030;
+    border-radius: 5px;
+}
+
+.movie-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: transform 200ms ease-in-out;
+
+    &:hover{
+        transform: scale(1.05);
+    }
+
+    & > figure {
+        width: 150px;
+        aspect-ratio: 2/3;
+        border-radius: 15px;
+        overflow: hidden;
+        background-color: var(--background-clr);
+
+        & > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    & > h3 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.no-movies {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: rgb(184, 184, 184);
+    font-style: italic;
+    padding: 2rem;
+}

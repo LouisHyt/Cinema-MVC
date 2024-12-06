@@ -4,7 +4,7 @@
     $movies = array_slice($recommendations, 1); 
 ?>
 <link rel="stylesheet" href="public/css/homePage.css">
-<script src="public/js/homePage.js" defer></script>
+<script src="public/js/utils/movieRedirect.js" defer></script>
 <div class="home-page">
     <section class="front-movie" style="background-image: url('<?= $frontMovie['banner_image'] ?>')">
         <div class="movie-infos">
