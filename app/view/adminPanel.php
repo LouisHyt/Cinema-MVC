@@ -1,6 +1,6 @@
 <?php
 
-    //var_dump($data);
+    session_start();
 
 ?>
 
@@ -14,6 +14,18 @@
     <title>Admin Panel</title>
 </head>
 <body>
+    <?php
+        if(isset($_SESSION['formstatus'])) {
+            $status = $_SESSION['formstatus']["success"] ? "success" : "error";
+            $message = $_SESSION['formstatus']["message"];
+            echo (
+            "<div class='form-status $status'>
+                <p>$message</p>
+            </div>"
+            );
+            unset($_SESSION['formstatus']);
+        }
+    ?>
     <main class="admin-panel">
         <section class="admin-header">
             <div class="select-entity">
@@ -29,10 +41,10 @@
                     <input type="text" class="search-input" placeholder="Search...">
                     <i class="fa-solid fa-magnifying-glass search-icon"></i>
                 </div>
-                <button class="add-button">
+                <a class="add-button" href="./?action=form&entity=<?= $data["entity"] ?>&operation=add">
                     <i class="fa-solid fa-plus"></i>
                     Add
-                </button>
+                </a>
             </div>
         </section>
         <section class="admin-content">

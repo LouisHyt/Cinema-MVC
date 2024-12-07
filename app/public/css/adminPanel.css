@@ -36,6 +36,29 @@ body{
     background-color: var(--background-secondary-clr);
 }
 
+.form-status {
+    margin-top: 2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+
+    & > p {
+        display: inline-block;
+        padding: 1rem;
+        border-radius: 10px;
+    }
+
+    &.success > p {
+        background-color: #28a745;
+    }
+
+    &.error > p {
+        background-color: #dc3545;
+    }
+}
+
 .admin-panel {
     background-color: var(--background-secondary-clr);
     padding: 2.5rem;
