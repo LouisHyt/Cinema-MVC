@@ -5,7 +5,7 @@
 <script src="public/js/navbar.js" defer></script>
 <nav id="navbar">
     <div class="search-container">
-        <input type="text" class="search-input" placeholder="Rechercher un film">
+        <input type="text" class="search-input" placeholder="Look for a movie">
         <i class="fas fa-search search-icon"></i>
         <div class="search-results"></div>
     </div>

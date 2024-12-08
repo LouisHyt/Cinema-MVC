@@ -29,13 +29,13 @@ if (!empty($data['entity_data'])) : ?>
                     <td><?= $movie["note"] ?>/5</td>
                     <td class="field-truncate"><?= substr($movie["synopsis"], 0, 100) ?>...</td>
                     <td>
-                        <button type="button" class="action edit">Edit</a>
-                        <button type="button" class="action delete">Delete</a>
+                        <a href="./?action=form&entity=<?= $data["entity"] ?>&operation=edit&id=<?= $movie["id_movie"] ?>" type="button" class="action edit">Edit</a>
+                        <a href="./?action=form&entity=<?= $data["entity"] ?>&operation=delete&id=<?= $movie["id_movie"] ?>" type="button" class="action delete">Delete</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 <?php else : ?>
-    <p>Nobody found</p>
+    <p>No movie found</p>
 <?php endif; ?>

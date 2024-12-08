@@ -123,12 +123,17 @@
 
         public function deleteMovie($id) {
             $pdo = Connect::seConnecter();
-            $request = $pdo->prepare("
-                DELETE FROM movie
-                WHERE id_movie = :id
-            ");
-            $request->bindValue(":id", $id, \PDO::PARAM_INT);
-            $request->execute();
+
+            try{
+                $request = $pdo->prepare("
+                    DELETE FROM movie
+                    WHERE id_movie = :id
+                ");
+                $request->bindValue(":id", $id, \PDO::PARAM_INT);
+                $request->execute();
+            } catch (\PDOException $error) {
+                return $error;
+            }
         }
         
     }

@@ -63,21 +63,27 @@
                             if ($operation === "add") {
                                 $ctrlForm->showAddMovie();
                             } else if ($operation === "edit") {
-                                $ctrlForm->showEditMovie();
+                                $ctrlForm->showEditMovie($id);
+                            } else if ($operation === "delete") {
+                                $ctrlForm->deleteMovie($id);
                             }
                             break;
                         case "persons":
                             if ($operation === "add") {
                                 $ctrlForm->showAddPerson();
                             } else if ($operation === "edit") {
-                                $ctrlForm->showEditPerson();
+                                $ctrlForm->showEditPerson($id);
+                            } else if ($operation === "delete") {
+                                $ctrlForm->deletePerson($id);
                             }
                             break;
                         case "categories":
                             if ($operation === "add") {
                                 $ctrlForm->showAddCategory();
                             } else if ($operation === "edit") {
-                                $ctrlForm->showEditCategory();
+                                $ctrlForm->showEditCategory($id);
+                            } else if ($operation === "delete") {
+                                $ctrlForm->deleteCategory($id);
                             }
                             break;
                         default:
@@ -93,14 +99,8 @@
             case "searchMoviesByName":
                 $ctrlApi->searchMoviesByName();
             break;
-            case "deleteCategory":
-                $ctrlApi->deleteCategory();
-            break;
-            case "deleteMovie":
-                $ctrlApi->deleteMovie();
-            break;
-            case "deletePerson":
-                $ctrlApi->deletePerson();
+            case "searchActorsByName":
+                $ctrlApi->searchActorsByName();
             break;
         }
     }

@@ -1,60 +1,226 @@
 <?php
 
     namespace Controller;
-    use Model\Manager\FormManager;
+    use Model\Manager\CategoryManager;
+    use Model\Manager\PersonManager;
+    use Model\Manager\MovieManager;
+    use Services\Utils;
 
     class FormController {
 
         //Add
         public function showAddMovie() {
-            require "view/forms/addMovie.php";
+            if(!empty($_POST)) {
+                var_dump($_POST);
+                die;
+            } else {
+                $personManager = new PersonManager();
+                $directors = $personManager->getDirectors();
+                require "view/forms/formMovie.php";
+            }
         }
 
         public function showAddPerson() {
-            require "view/forms/addPerson.php";
+            if(!empty($_POST)) {
+                session_start();
+                $personManager = new PersonManager();
+                $postData = Utils::validatePersonForm();
+
+                if(!$postData["isActor"] && !$postData["isDirector"]) {
+                    $_SESSION["formstatus"] = [
+                        "success" => false,
+                        "message" => "The person must be either an actor, a director or both!",
+                    ];
+                } else if($postData["firstName"] && $postData["lastName"]) {
+                    $error = $personManager->addPerson($postData);
+                    if(isset($error)) {	
+                        $_SESSION["formstatus"] = [
+                            "success" => false,
+                            "message" => $error->errorInfo[2],
+                        ];
+                    } else {
+                        $_SESSION["formstatus"] = [
+                            "success" => true,
+                            "message" => "The person " . $postData["firstName"] ." ". $postData["lastName"] . " has been successfully added!",
+                        ];
+                        header("Location: ./?action=admin&entity=persons");
+                        exit();
+                    }
+                } else {
+                    $_SESSION["formstatus"] = [
+                        "success" => false,
+                        "message" => "The person must have a valid first name and last name!",
+                    ];
+                }
+            }
+            require "view/forms/formPerson.php";
         }
 
         public function showAddCategory() {
 
-            $formManager = new FormManager();
+            $categoryManager = new CategoryManager();
 
-            if(isset($_POST['categoryName'])) {
+            if(!empty($_POST)) {
                 session_start();
-                $category_name = filter_input(INPUT_POST, 'categoryName', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                $error = $formManager->addCategory($category_name);
-
-                if(isset($error)) {
+                $category_name = filter_input(INPUT_POST, 'categoryName', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE);
+                
+                if(!$category_name) {
                     $_SESSION["formstatus"] = [
                         "success" => false,
-                        "message" => $error->errorInfo[2],
+                        "message" => "The category must have a valid name!",
                     ];
-                    require "view/forms/addCategory.php";
                 } else {
-                    $_SESSION["formstatus"] = [
-                        "success" => true,
-                        "message" => "The category $category_name has been successfully added!",
-                    ];
-                    header("Location: ./?action=admin&entity=categories");
-                    exit();
+                    $error = $categoryManager->addCategory($category_name);
+                    if(isset($error)) {
+                        $_SESSION["formstatus"] = [
+                            "success" => false,
+                            "message" => $error->errorInfo[2],
+                        ];
+                    } else {
+                        $_SESSION["formstatus"] = [
+                            "success" => true,
+                            "message" => "The category $category_name has been successfully added!",
+                        ];
+                        header("Location: ./?action=admin&entity=categories");
+                        exit();
+                    }
                 }
-
-            } else {    
-                require "view/forms/addCategory.php";
-            }
+            }    
+            require "view/forms/formCategory.php";
         }
 
 
         //Edit
-        public function showEditMovie() {
-            require "view/forms/editMovie.php";
+        public function showEditMovie($id) {
+            require "view/forms/formMovie.php";
         }
 
-        public function showEditPerson() {
-            require "view/forms/editPerson.php";
+        public function showEditPerson($id) {
+            $personManager = new PersonManager();
+            $personData = $personManager->getPersonById($id);
+
+            if(!empty($_POST)) {
+                session_start();
+                $postData = Utils::validatePersonForm();
+                if(!$postData["isActor"] && !$postData["isDirector"]) {
+                    $_SESSION["formstatus"] = [
+                        "success" => false,
+                        "message" => "The person must be either an actor, a director or both!",
+                    ];
+                } else if($postData["firstName"] && $postData["lastName"]) {
+                    $error = $personManager->editPerson($postData, $id);
+                    if(isset($error)) {	
+                        $_SESSION["formstatus"] = [
+                            "success" => false,
+                            "message" => $error->errorInfo[2],
+                        ];
+                    } else {
+                        $_SESSION["formstatus"] = [
+                            "success" => true,
+                            "message" => "The person " . $postData["firstName"] ." ". $postData["lastName"] . " has been successfully updated!",
+                        ];
+                        header("Location: ./?action=admin&entity=persons");
+                        exit();
+                    }
+                } else {
+                    $_SESSION["formstatus"] = [
+                        "success" => false,
+                        "message" => "The person must have a valid first name and last name!",
+                    ];
+                }
+            }
+            require "view/forms/formPerson.php";
         }
 
-        public function showEditCategory() {
-            require "view/forms/editCategory.php";
+        public function showEditCategory($id) {
+            $categoryManager = new CategoryManager();
+            $categoryData = $categoryManager->getCategoryById($id);
+
+            if(!empty($_POST)) {
+                session_start();
+                $category_name = filter_input(INPUT_POST, 'categoryName', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE);
+
+                if(!$category_name) {
+                    $_SESSION["formstatus"] = [
+                        "success" => false,
+                        "message" => "The category must have a valid name!",
+                    ];
+                } else {
+                    $error = $categoryManager->editCategory($category_name, $id);
+                    if(isset($error)) {
+                        $_SESSION["formstatus"] = [
+                            "success" => false,
+                            "message" => $error->errorInfo[2]
+                        ];
+                    } else {
+                        $_SESSION["formstatus"] = [
+                            "success" => true,
+                            "message" => "The category has been successfully updated!"
+                        ];
+                        header("Location: ./?action=admin&entity=categories");
+                        exit();
+                    }
+                }
+            }
+            require "view/forms/formCategory.php";
+        }
+
+        //Delete
+        public function deleteMovie($id) {
+            session_start(); 
+            $movieManager = new MovieManager();
+            $error = $movieManager->deleteMovie($id);
+            if(isset($error)) {
+                $_SESSION["formstatus"] = [
+                    "success" => false,
+                    "message" => $error->errorInfo[2],
+                ];
+            } else {
+                $_SESSION["formstatus"] = [
+                    "success" => true,
+                    "message" => "The movie has been successfully deleted!",
+                ];
+            }
+            header("Location: ./?action=admin&entity=movies");
+            exit();
+        }
+
+        public function deletePerson($id) {
+            session_start(); 
+            $personManager = new PersonManager();
+            $error = $personManager->deletePerson($id);
+            if(isset($error)) {
+                $_SESSION["formstatus"] = [
+                    "success" => false,
+                    "message" => $error->errorInfo[2],
+                ];
+            } else {
+                $_SESSION["formstatus"] = [
+                    "success" => true,
+                    "message" => "The person has been successfully deleted!",
+                ];
+            }
+            header("Location: ./?action=admin&entity=persons");
+            exit();
+        }
+
+        public function deleteCategory($id) {
+            session_start();     
+            $categoryManager = new CategoryManager();
+            $error = $categoryManager->deleteCategory($id);
+            if(isset($error)) {
+                $_SESSION["formstatus"] = [
+                    "success" => false,
+                    "message" => $error->errorInfo[2],
+                ];
+            } else {
+                $_SESSION["formstatus"] = [
+                    "success" => true,
+                    "message" => "The category has been successfully deleted!",
+                ];
+            }
+            header("Location: ./?action=admin&entity=categories");
+            exit();
         }
 
     }

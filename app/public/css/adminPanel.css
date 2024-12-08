@@ -228,7 +228,7 @@ body{
         background-color: rgba(255, 101, 0, 0.1);
     }
 
-    button.action{
+    a.action{
         padding: 0.5rem 1rem;
         border-radius: 4px;
         font-weight: 500;
@@ -238,7 +238,7 @@ body{
         cursor: pointer;
     }
 
-    button.edit{
+    a.edit{
         background-color: #ffc107;
         color: black;
         border: none;
@@ -248,7 +248,7 @@ body{
         }
     }
 
-    button.delete{
+    a.delete{
         background-color: #dc3545;
         color: white;
         border: none;

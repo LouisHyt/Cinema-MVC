@@ -18,8 +18,8 @@ if (!empty($data['entity_data'])) : ?>
                     <td><?= $category["label"] ?></td>
                     <td><?= $category["movies_in"] ?></td>
                     <td>
-                        <button type="button" class="action edit">Edit</button>
-                        <button type="button" class="action delete">Delete</button>
+                        <a href="./?action=form&entity=<?= $data["entity"] ?>&operation=edit&id=<?= $category["id_category"] ?>" type="button" class="action edit">Edit</a>
+                        <a href="./?action=form&entity=<?= $data["entity"] ?>&operation=delete&id=<?= $category["id_category"] ?>" type="button" class="action delete">Delete</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

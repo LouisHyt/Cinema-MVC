@@ -20,21 +20,61 @@
             return $categories;
         }
 
-        public function editCategory(int $id) {
-            return null;
-        }
+        public function getCategoryById(int $id) {
 
-        public function addCategory() {
-            return null;
-        }
-
-        public function deleteCategory(int $id) {
             $pdo = Connect::seConnecter();
             $request = $pdo->prepare("
-                DELETE FROM category
+                SELECT label
+                FROM category
                 WHERE id_category = :id
             ");
             $request->bindValue(":id", $id, \PDO::PARAM_INT);
             $request->execute();
+            $category = $request->fetch(\PDO::FETCH_ASSOC);
+            return $category;
+        }
+
+        public function editCategory(string $label, int $id) {
+            $pdo = Connect::seConnecter();
+            try {
+                $request = $pdo->prepare("
+                    UPDATE category
+                    SET label = :label
+                    WHERE id_category = :id 
+                ");
+                $request->bindValue(":id", $id, \PDO::PARAM_INT);
+                $request->bindValue(":label", $label, \PDO::PARAM_STR);
+                $request->execute();
+            } catch (\PDOException $error) {
+                return $error;
+            }
+        }
+
+        public function addCategory(string $name) {
+            $pdo = Connect::seConnecter();
+            try {
+                $request = $pdo->prepare("
+                    INSERT INTO category (label)
+                    VALUES (:name)
+                ");
+                $request->bindValue(":name", "$name", \PDO::PARAM_STR);
+                $request->execute();
+            } catch (\PDOException $error) {
+                return $error;
+            }
+        }
+
+        public function deleteCategory(int $id) {
+            $pdo = Connect::seConnecter();
+            try {
+                $request = $pdo->prepare("
+                    DELETE FROM category
+                    WHERE id_category = :id
+                ");
+                $request->bindValue(":id", $id, \PDO::PARAM_INT);
+                $request->execute();
+            } catch (\PDOException $error) {
+                return $error;
+            }
         }
     }
