@@ -25,6 +25,20 @@
                             <label for="note">Note</label>
                             <input type="number" name="note" id="note" min="0" max="5">
                         </div>
+                        <div class="form-group">
+                            <label for="categories">Categories</label>
+                            <div class="select-wrapper">
+                                <div class="select-field">Select Categories</div>
+                                <div class="select-items">
+                                    <?php foreach($categories as $category) : ?>
+                                        <div class="select-option">
+                                            <input type="checkbox" name="categories[]" id="category-<?= $category["id_category"] ?>" value="<?= $category["id_category"] ?>">
+                                            <label for="category-<?= $category["id_category"] ?>"><?= $category["label"] ?></label>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-column">
                         <div class="form-group">
@@ -58,18 +72,38 @@
                 <div class="side-header">
                     <h3>Casting</h3>
                     <div class="search-container">
+                        <p class="subtext">Can't find an actor ? <a href="./?action=form&entity=persons&operation=add">Add one</a></p>
                         <input type="text" class="search-input" placeholder="Look for an actor">
                         <i class="fas fa-search search-icon"></i>
                         <div class="search-results"></div>
                     </div>
                 </div>
-                <div class="actors-field">
+                <div class="actors-field form-group">
                     
                 </div>
             </div>
         </div>
         <button type="submit" name="submit" class="submit-btn">Send</button>
     </form>
+
+    <template id="actor-card-template">
+    <div class="actor-card">
+        <div class="left-section">
+            <label>Actor</label>
+            <input type="hidden" class="actor-id" hidden>
+            <input type="text" class="actor-name" readonly>
+        </div>
+        <div class="right-section">
+            <label>Role</label>
+            <select class="actor-role">
+                <?php foreach($roles as $role) : ?>
+                    <option value=<?= $role["id_role"] ?>><?= $role["role_name"] ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <i class="fa-solid fa-xmark delete-actor"></i>
+    </div>
+    </template>
 </div>
 
 <?php

@@ -121,6 +121,58 @@
 
         }
 
+        public function addMovie($data) {
+            $pdo = Connect::seConnecter();
+            try{
+                $request = $pdo->prepare("
+                    INSERT INTO movie (title, release_date, duration, note, synopsis, poster_image, banner_image, id_director)
+                    VALUES (:title, :releaseDate, :duration, :note, :synopsis, :posterUrl, :bannerUrl, :director)
+                ");
+                $request->bindValue(":title", $data["movieTitle"], \PDO::PARAM_STR);
+                $request->bindValue(":releaseDate", $data["releaseDate"], \PDO::PARAM_STR);
+                $request->bindValue(":duration", $data["duration"], \PDO::PARAM_INT);
+                $request->bindValue(":note", $data["note"], \PDO::PARAM_INT);
+                $request->bindValue(":synopsis", $data["synopsis"], \PDO::PARAM_STR);
+                $request->bindValue(":posterUrl", $data["posterUrl"], \PDO::PARAM_STR);
+                $request->bindValue(":bannerUrl", $data["bannerUrl"], \PDO::PARAM_STR);
+                $request->bindValue(":director", $data["director"], \PDO::PARAM_INT);
+                $request->execute();
+
+                $idMovie = $pdo->lastInsertId();
+
+                if($data["categories"] !== null) {
+                    foreach($data["categories"] as $category) {
+                        $category = intval($category);
+                        $request = $pdo->prepare("
+                            INSERT INTO belongs (id_movie, id_category)
+                            VALUES (:id_movie, :id_category)
+                        ");
+                        $request->bindValue(":id_movie", $idMovie, \PDO::PARAM_INT);
+                        $request->bindValue(":id_category", $category, \PDO::PARAM_INT);
+                        $request->execute();
+                    }
+                }
+
+                if($data["actors"] !== null) {
+                    foreach($data["actors"] as $actor) {
+                        $id_actor = intval($actor["id_actor"]);
+                        $id_role = intval($actor["id_role"]);
+                        $request = $pdo->prepare("
+                            INSERT INTO play (id_movie, id_actor, id_role)
+                            VALUES (:id_movie, :id_actor, :id_role)
+                        ");
+                        $request->bindValue(":id_movie", $idMovie, \PDO::PARAM_INT);
+                        $request->bindValue(":id_actor", $id_actor, \PDO::PARAM_INT);
+                        $request->bindValue(":id_role", $id_role, \PDO::PARAM_INT);
+                        $request->execute();
+                    }
+                }
+
+            } catch (\PDOException $error) {
+                return $error;
+            }
+        }
+
         public function deleteMovie($id) {
             $pdo = Connect::seConnecter();
 

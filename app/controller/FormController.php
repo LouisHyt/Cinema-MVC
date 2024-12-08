@@ -4,18 +4,45 @@
     use Model\Manager\CategoryManager;
     use Model\Manager\PersonManager;
     use Model\Manager\MovieManager;
+    use Model\Manager\RoleManager;
     use Services\Utils;
 
     class FormController {
 
         //Add
         public function showAddMovie() {
+            $personManager = new PersonManager();
+            $roleManager = new RoleManager();
+            $categoryManager = new CategoryManager();
+            $categories = $categoryManager->getCategories();
+            $roles = $roleManager->getRoles();
+            $directors = $personManager->getDirectors();
             if(!empty($_POST)) {
-                var_dump($_POST);
-                die;
+                session_start();
+                $postData = Utils::validateMovieForm();
+                if(!$postData["movieTitle"] || !$postData["releaseDate"] || !$postData["duration"]) {
+                    $_SESSION["formstatus"] = [
+                        "success" => false,
+                        "message" => "The movie must have a valid title, release date, and duration!",
+                    ];
+                } else {
+                    $movieManager = new MovieManager();
+                    $error = $movieManager->addMovie($postData);
+                    if(isset($error)) {
+                        $_SESSION["formstatus"] = [
+                            "success" => false,
+                            "message" => $error->errorInfo[2],
+                        ];
+                    } else {
+                        $_SESSION["formstatus"] = [
+                            "success" => true,
+                            "message" => "The movie " . $postData["title"] . " has been successfully added!",
+                        ];
+                        header("Location: ./?action=admin&entity=movies");
+                        exit();
+                    }
+                }
             } else {
-                $personManager = new PersonManager();
-                $directors = $personManager->getDirectors();
                 require "view/forms/formMovie.php";
             }
         }

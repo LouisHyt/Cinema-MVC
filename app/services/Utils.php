@@ -61,6 +61,21 @@
                 "bio" => filter_input(INPUT_POST, 'bio', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE),
             ];
         }
+
+        public static function validateMovieForm() {
+            return [
+                "movieTitle" => filter_input(INPUT_POST, 'movieTitle', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE),
+                "releaseDate" => filter_input(INPUT_POST, 'releaseDate', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE),
+                "duration" => filter_input(INPUT_POST, 'duration', FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE),
+                "note" => filter_input(INPUT_POST, 'note', FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE),
+                "bannerUrl" => filter_input(INPUT_POST, 'bannerUrl', FILTER_VALIDATE_URL, FILTER_NULL_ON_FAILURE),
+                "posterUrl" => filter_input(INPUT_POST, 'posterUrl', FILTER_VALIDATE_URL, FILTER_NULL_ON_FAILURE),
+                "director" => filter_input(INPUT_POST, 'director', FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE) !== 0 ? filter_input(INPUT_POST, 'director', FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE) : null,
+                "synopsis" => filter_input(INPUT_POST, 'synopsis', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE),
+                "actors" => filter_input(INPUT_POST, 'actors', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY),
+                "categories" => filter_input(INPUT_POST, 'categories', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY),
+            ];
+        }
     }
 
 ?>
