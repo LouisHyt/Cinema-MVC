@@ -24,11 +24,12 @@ CREATE TABLE IF NOT EXISTS `actor` (
   `id_actor` int NOT NULL AUTO_INCREMENT,
   `id_person` int NOT NULL,
   PRIMARY KEY (`id_actor`),
+  UNIQUE KEY `id_person` (`id_person`),
   KEY `FK2` (`id_person`),
   CONSTRAINT `FK2` FOREIGN KEY (`id_person`) REFERENCES `person` (`id_person`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table cinema_louis.actor : ~24 rows (environ)
+-- Listage des données de la table cinema_louis.actor : ~22 rows (environ)
 INSERT INTO `actor` (`id_actor`, `id_person`) VALUES
 	(1, 1),
 	(2, 2),
@@ -53,19 +54,20 @@ INSERT INTO `actor` (`id_actor`, `id_person`) VALUES
 	(21, 31),
 	(22, 34),
 	(23, 38),
-	(24, 39);
+	(24, 39),
+	(25, 41);
 
 -- Listage de la structure de table cinema_louis. belongs
 CREATE TABLE IF NOT EXISTS `belongs` (
-  `id_movie` int DEFAULT NULL,
-  `id_category` int DEFAULT NULL,
+  `id_movie` int NOT NULL,
+  `id_category` int NOT NULL,
   KEY `FK_belongs_movie` (`id_movie`),
   KEY `FK_belongs_category` (`id_category`),
   CONSTRAINT `FK_belongs_category` FOREIGN KEY (`id_category`) REFERENCES `category` (`id_category`) ON DELETE CASCADE,
   CONSTRAINT `FK_belongs_movie` FOREIGN KEY (`id_movie`) REFERENCES `movie` (`id_movie`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Listage des données de la table cinema_louis.belongs : ~16 rows (environ)
+-- Listage des données de la table cinema_louis.belongs : ~17 rows (environ)
 INSERT INTO `belongs` (`id_movie`, `id_category`) VALUES
 	(1, 1),
 	(2, 1),
@@ -87,19 +89,20 @@ INSERT INTO `belongs` (`id_movie`, `id_category`) VALUES
 CREATE TABLE IF NOT EXISTS `casting_role` (
   `id_role` int NOT NULL AUTO_INCREMENT,
   `role_name` varchar(70) NOT NULL,
-  PRIMARY KEY (`id_role`)
+  PRIMARY KEY (`id_role`),
+  UNIQUE KEY `role_name` (`role_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- Listage des données de la table cinema_louis.casting_role : ~8 rows (environ)
 INSERT INTO `casting_role` (`id_role`, `role_name`) VALUES
-	(1, 'Héros'),
-	(2, 'Méchant'),
 	(3, 'Amoureuse'),
-	(4, 'Traitre'),
-	(5, 'Traqueur'),
 	(6, 'Escroc'),
+	(1, 'Héros'),
+	(8, 'Inspecteur'),
 	(7, 'Le bon'),
-	(8, 'Inspecteur');
+	(2, 'Méchant'),
+	(4, 'Traitre'),
+	(5, 'Traqueur');
 
 -- Listage de la structure de table cinema_louis. category
 CREATE TABLE IF NOT EXISTS `category` (
@@ -107,13 +110,12 @@ CREATE TABLE IF NOT EXISTS `category` (
   `label` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_category`),
   UNIQUE KEY `label` (`label`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
 -- Listage des données de la table cinema_louis.category : ~6 rows (environ)
 INSERT INTO `category` (`id_category`, `label`) VALUES
 	(1, 'action'),
 	(4, 'drama'),
-	(11, 'humour'),
 	(2, 'romance'),
 	(3, 'science-fiction'),
 	(6, 'thriller'),
@@ -124,11 +126,12 @@ CREATE TABLE IF NOT EXISTS `director` (
   `id_director` int NOT NULL AUTO_INCREMENT,
   `id_person` int NOT NULL,
   PRIMARY KEY (`id_director`),
+  UNIQUE KEY `id_person` (`id_person`),
   KEY `FK1` (`id_person`),
   CONSTRAINT `FK1` FOREIGN KEY (`id_person`) REFERENCES `person` (`id_person`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table cinema_louis.director : ~12 rows (environ)
+-- Listage des données de la table cinema_louis.director : ~14 rows (environ)
 INSERT INTO `director` (`id_director`, `id_person`) VALUES
 	(1, 21),
 	(2, 22),
@@ -159,9 +162,9 @@ CREATE TABLE IF NOT EXISTS `movie` (
   PRIMARY KEY (`id_movie`),
   KEY `FK_movie_director` (`id_director`),
   CONSTRAINT `FK_movie_director` FOREIGN KEY (`id_director`) REFERENCES `director` (`id_director`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table cinema_louis.movie : ~15 rows (environ)
+-- Listage des données de la table cinema_louis.movie : ~17 rows (environ)
 INSERT INTO `movie` (`id_movie`, `title`, `release_date`, `duration`, `synopsis`, `note`, `banner_image`, `id_director`, `poster_image`) VALUES
 	(1, 'Inception', '2010-07-16', 148, 'Un voleur qui pénètre dans les rêves des autres pour voler des secrets doit effectuer une dernière mission pour retrouver sa famille.', 4, 'https://m.media-amazon.com/images/S/pv-target-images/1749d2da627a6f41612e33122d086631b7910595a7fedda06ccf97fa8034cd2e.jpg', 3, 'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/aej3LRUga5rhgkmRP6XMFw3ejbl.jpg'),
 	(2, 'Pulp Fiction', '1994-10-14', 154, 'Trois histoires entrecroisées qui tournent autour du monde criminel de Los Angeles.', 5, 'https://image.over-blog.com/2WVCnbVoa39dcUkKNYCPRZlUJjU=/filters:no_upscale()/image%2F0660069%2F20240528%2Fob_b7d602_pulp-fiction-1.jpg', 4, 'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/4TBdF7nFw2aKNM0gPOlDNq3v3se.jpg'),
@@ -182,70 +185,71 @@ INSERT INTO `movie` (`id_movie`, `title`, `release_date`, `duration`, `synopsis`
 -- Listage de la structure de table cinema_louis. person
 CREATE TABLE IF NOT EXISTS `person` (
   `id_person` int NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(50) DEFAULT NULL,
-  `last_name` varchar(50) DEFAULT NULL,
+  `first_name` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `last_name` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `birth_date` date DEFAULT NULL,
   `genre` varchar(30) DEFAULT NULL,
   `profile_image` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `death_date` date DEFAULT NULL,
   `bio` text,
   PRIMARY KEY (`id_person`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table cinema_louis.person : ~34 rows (environ)
+-- Listage des données de la table cinema_louis.person : ~37 rows (environ)
 INSERT INTO `person` (`id_person`, `first_name`, `last_name`, `birth_date`, `genre`, `profile_image`, `death_date`, `bio`) VALUES
-	(1, 'Leonardo', 'DiCaprio', '1974-11-11', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Leonardo_Dicaprio_Cannes_2019.jpg/250px-Leonardo_Dicaprio_Cannes_2019.jpg', NULL, NULL),
-	(2, 'Brad', 'Pitt', '1963-12-18', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Brad_Pitt-69858.jpg/240px-Brad_Pitt-69858.jpg', NULL, NULL),
-	(3, 'Meryl', 'Streep', '1949-06-22', 'Femme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Meryl_Streep_December_2018_%28cropped%29.jpg/220px-Meryl_Streep_December_2018_%28cropped%29.jpg', NULL, NULL),
-	(4, 'Tom', 'Hanks', '1956-07-09', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Tom_Hanks_at_the_Elvis_Premiere_2022.jpg/220px-Tom_Hanks_at_the_Elvis_Premiere_2022.jpg', NULL, NULL),
-	(5, 'Angelina', 'Jolie', '1975-06-04', 'Femme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Angelina_Jolie-643531_%28cropped%29.jpg/240px-Angelina_Jolie-643531_%28cropped%29.jpg', NULL, NULL),
-	(6, 'Johnny', 'Depp', '1963-06-09', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Johnny_Depp_2020.jpg/260px-Johnny_Depp_2020.jpg', NULL, NULL),
-	(7, 'Charlize', 'Theron', '1975-08-07', 'Femme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Charlize-theron-IMG_6045.jpg/220px-Charlize-theron-IMG_6045.jpg', NULL, NULL),
-	(8, 'Morgan', 'Freeman', '1937-06-01', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Morgan_Freeman_Deauville_2018.jpg/260px-Morgan_Freeman_Deauville_2018.jpg', NULL, NULL),
-	(9, 'Robert', 'De Niro', '1943-08-17', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Robert_De_Niro_Cannes_2016_2.jpg/220px-Robert_De_Niro_Cannes_2016_2.jpg', NULL, NULL),
-	(10, 'Al', 'Pacino', '1940-04-25', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Al_Pacino_2016_%2830401544240%29.jpg/260px-Al_Pacino_2016_%2830401544240%29.jpg', NULL, NULL),
-	(11, 'Scarlett', 'Johansson', '1984-11-22', 'Femme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Scarlett_Johansson_by_Gage_Skidmore_2_%28cropped%2C_2%29.jpg/220px-Scarlett_Johansson_by_Gage_Skidmore_2_%28cropped%2C_2%29.jpg', NULL, NULL),
-	(12, 'Will', 'Smith', '1968-09-25', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/TechCrunch_Disrupt_2019_%2848834434641%29_%28cropped%29.jpg/220px-TechCrunch_Disrupt_2019_%2848834434641%29_%28cropped%29.jpg', NULL, NULL),
-	(13, 'Jennifer', 'Lawrence', '1990-08-15', 'Femme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Jennifer_Lawrence_at_the_2024_Golden_Globes_%281%29.png/220px-Jennifer_Lawrence_at_the_2024_Golden_Globes_%281%29.png', NULL, NULL),
-	(14, 'Kate', 'Winslet', '1975-10-05', 'Femme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Kate_Winslet_March_18%2C_2014_%28headshot%29.jpg/250px-Kate_Winslet_March_18%2C_2014_%28headshot%29.jpg', NULL, NULL),
-	(15, 'Matthew', 'McConaughey', '1969-11-04', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Matthew_McConaughey_2019_%2848648344772%29.jpg/240px-Matthew_McConaughey_2019_%2848648344772%29.jpg', NULL, NULL),
-	(16, 'Natalie', 'Portman', '1981-06-09', 'Femme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Natalie_Portman_2023.jpg/220px-Natalie_Portman_2023.jpg', NULL, NULL),
-	(17, 'Denzel', 'Washington', '1954-12-28', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Denzel_Washington_2018.jpg/220px-Denzel_Washington_2018.jpg', NULL, NULL),
-	(18, 'Julia', 'Roberts', '1967-10-28', 'Femme', 'https://media.vogue.fr/photos/637fa141013167a160d7f503/2:3/w_2560%2Cc_limit/MCDEAPR_EC103.jpg', NULL, NULL),
-	(19, 'Harrison', 'Ford', '1942-07-13', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Harrison_Ford_by_Gage_Skidmore_2.jpg/250px-Harrison_Ford_by_Gage_Skidmore_2.jpg', NULL, NULL),
-	(20, 'Samuel', 'L. Jackson', '1948-12-21', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/SamuelLJackson.jpg/220px-SamuelLJackson.jpg', NULL, NULL),
-	(21, 'Steven', 'Spielberg', '1946-12-18', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/MKr25402_Steven_Spielberg_%28Berlinale_2023%29.jpg/260px-MKr25402_Steven_Spielberg_%28Berlinale_2023%29.jpg', NULL, NULL),
-	(22, 'Martin', 'Scorsese', '1942-11-17', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Martin_Scorsese_Berlinale_2010_%28cropped2%29.jpg/260px-Martin_Scorsese_Berlinale_2010_%28cropped2%29.jpg', NULL, NULL),
-	(23, 'Christopher', 'Nolan', '1970-07-30', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Christopher_Nolan_Cannes_2018.jpg/260px-Christopher_Nolan_Cannes_2018.jpg', NULL, NULL),
-	(24, 'Quentin', 'Tarantino', '1963-03-27', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Quentin_Tarantino_by_Gage_Skidmore.jpg/220px-Quentin_Tarantino_by_Gage_Skidmore.jpg', NULL, NULL),
-	(25, 'Ridley', 'Scott', '1937-11-30', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Ridley_Scott_%286998769387%29.jpg/220px-Ridley_Scott_%286998769387%29.jpg', NULL, NULL),
-	(26, 'James', 'Cameron', '1954-08-16', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/James_Cameron_by_Gage_Skidmore.jpg/290px-James_Cameron_by_Gage_Skidmore.jpg', NULL, NULL),
-	(27, 'Alfonso', 'Cuarón', '1961-11-28', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Alfonso_Cuar%C3%B3n%2C_President_jury_Venezia_72_%2825805089406%29_%28cropped%29.jpg/220px-Alfonso_Cuar%C3%B3n%2C_President_jury_Venezia_72_%2825805089406%29_%28cropped%29.jpg', NULL, NULL),
-	(28, 'Tim', 'Burton', '1958-08-25', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Tim_Burton-63605.jpg/220px-Tim_Burton-63605.jpg', NULL, NULL),
-	(29, 'Woody', 'Allen', '1935-12-01', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Woody-Allen-2015-07-18-by-Adam-Bielawski.jpg/260px-Woody-Allen-2015-07-18-by-Adam-Bielawski.jpg', NULL, NULL),
-	(30, 'Francis', 'Ford Coppola', '1939-04-07', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Francis_Ford_Coppola_2011_CC.jpg/220px-Francis_Ford_Coppola_2011_CC.jpg', NULL, NULL),
-	(31, 'Clint', 'Eastwood', '1930-11-05', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Clint_Eastwood_at_2010_New_York_Film_Festival.jpg/220px-Clint_Eastwood_at_2010_New_York_Film_Festival.jpg', NULL, NULL),
-	(32, 'Sergio', 'Leone', '1929-01-03', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Sergio_Leone.jpg/260px-Sergio_Leone.jpg', '1989-04-30', NULL),
-	(34, 'Tom', 'Hardy', '1977-09-11', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Tom_Hardy_by_Gage_Skidmore.jpg/260px-Tom_Hardy_by_Gage_Skidmore.jpg', NULL, NULL),
-	(35, 'Denis', 'Villeneuve', '1967-10-03', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Denis_Villeneuve_by_Gage_Skidmore.jpg/260px-Denis_Villeneuve_by_Gage_Skidmore.jpg', NULL, NULL),
-	(37, 'Chuck', 'Russel', '2020-12-05', 'Homme', 'https://m.media-amazon.com/images/M/MV5BZDhkZDdhMDEtYWJkYi00MTZkLWJlMmMtY2ZkOWIzODhlMjhlXkEyXkFqcGc@._V1_.jpg', NULL, NULL),
-	(38, 'Jim', 'Carrey', '1962-01-17', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Jim_Carrey_2008.jpg/220px-Jim_Carrey_2008.jpg', NULL, NULL),
-	(39, 'Peter', 'Greene', '1965-10-08', 'Homme', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Peter_Greene_2014.jpg/220px-Peter_Greene_2014.jpg', NULL, NULL);
+	(1, 'Leonardo', 'DiCaprio', '1974-11-11', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Leonardo_Dicaprio_Cannes_2019.jpg/250px-Leonardo_Dicaprio_Cannes_2019.jpg', NULL, 'acteur de folie'),
+	(2, 'Brad', 'Pitt', '1963-12-18', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Brad_Pitt-69858.jpg/240px-Brad_Pitt-69858.jpg', NULL, NULL),
+	(3, 'Meryl', 'Streep', '1949-06-22', 'Female', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Meryl_Streep_December_2018_%28cropped%29.jpg/220px-Meryl_Streep_December_2018_%28cropped%29.jpg', NULL, NULL),
+	(4, 'Tom', 'Hanks', '1956-07-09', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Tom_Hanks_at_the_Elvis_Premiere_2022.jpg/220px-Tom_Hanks_at_the_Elvis_Premiere_2022.jpg', NULL, NULL),
+	(5, 'Angelina', 'Jolie', '1975-06-04', 'Female', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Angelina_Jolie-643531_%28cropped%29.jpg/240px-Angelina_Jolie-643531_%28cropped%29.jpg', NULL, NULL),
+	(6, 'Johnny', 'Depp', '1963-06-09', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Johnny_Depp_2020.jpg/260px-Johnny_Depp_2020.jpg', NULL, NULL),
+	(7, 'Charlize', 'Theron', '1975-08-07', 'Female', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Charlize-theron-IMG_6045.jpg/220px-Charlize-theron-IMG_6045.jpg', NULL, NULL),
+	(8, 'Morgan', 'Freeman', '1937-06-01', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Morgan_Freeman_Deauville_2018.jpg/260px-Morgan_Freeman_Deauville_2018.jpg', NULL, NULL),
+	(9, 'Robert', 'De Niro', '1943-08-17', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Robert_De_Niro_Cannes_2016_2.jpg/220px-Robert_De_Niro_Cannes_2016_2.jpg', NULL, NULL),
+	(10, 'Al', 'Pacino', '1940-04-25', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Al_Pacino_2016_%2830401544240%29.jpg/260px-Al_Pacino_2016_%2830401544240%29.jpg', NULL, NULL),
+	(11, 'Scarlett', 'Johansson', '1984-11-22', 'Female', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Scarlett_Johansson_by_Gage_Skidmore_2_%28cropped%2C_2%29.jpg/220px-Scarlett_Johansson_by_Gage_Skidmore_2_%28cropped%2C_2%29.jpg', NULL, NULL),
+	(12, 'Will', 'Smith', '1968-09-25', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/TechCrunch_Disrupt_2019_%2848834434641%29_%28cropped%29.jpg/220px-TechCrunch_Disrupt_2019_%2848834434641%29_%28cropped%29.jpg', NULL, NULL),
+	(13, 'Jennifer', 'Lawrence', '1990-08-15', 'Female', 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Jennifer_Lawrence_at_the_2024_Golden_Globes_%281%29.png/220px-Jennifer_Lawrence_at_the_2024_Golden_Globes_%281%29.png', NULL, NULL),
+	(14, 'Kate', 'Winslet', '1975-10-05', 'Female', 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Kate_Winslet_March_18%2C_2014_%28headshot%29.jpg/250px-Kate_Winslet_March_18%2C_2014_%28headshot%29.jpg', NULL, NULL),
+	(15, 'Matthew', 'McConaughey', '1969-11-04', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Matthew_McConaughey_2019_%2848648344772%29.jpg/240px-Matthew_McConaughey_2019_%2848648344772%29.jpg', NULL, NULL),
+	(16, 'Natalie', 'Portman', '1981-06-09', 'Female', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Natalie_Portman_2023.jpg/220px-Natalie_Portman_2023.jpg', NULL, NULL),
+	(17, 'Denzel', 'Washington', '1954-12-28', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Denzel_Washington_2018.jpg/220px-Denzel_Washington_2018.jpg', NULL, NULL),
+	(18, 'Julia', 'Roberts', '1967-10-28', 'Female', 'https://media.vogue.fr/photos/637fa141013167a160d7f503/2:3/w_2560%2Cc_limit/MCDEAPR_EC103.jpg', NULL, NULL),
+	(19, 'Harrison', 'Ford', '1942-07-13', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Harrison_Ford_by_Gage_Skidmore_2.jpg/250px-Harrison_Ford_by_Gage_Skidmore_2.jpg', NULL, NULL),
+	(20, 'Samuel', 'L. Jackson', '1948-12-21', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/SamuelLJackson.jpg/220px-SamuelLJackson.jpg', NULL, NULL),
+	(21, 'Steven', 'Spielberg', '1946-12-18', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/MKr25402_Steven_Spielberg_%28Berlinale_2023%29.jpg/260px-MKr25402_Steven_Spielberg_%28Berlinale_2023%29.jpg', NULL, NULL),
+	(22, 'Martin', 'Scorsese', '1942-11-17', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Martin_Scorsese_Berlinale_2010_%28cropped2%29.jpg/260px-Martin_Scorsese_Berlinale_2010_%28cropped2%29.jpg', NULL, NULL),
+	(23, 'Christopher', 'Nolan', '1970-07-30', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Christopher_Nolan_Cannes_2018.jpg/260px-Christopher_Nolan_Cannes_2018.jpg', NULL, NULL),
+	(24, 'Quentin', 'Tarantino', '1963-03-27', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Quentin_Tarantino_by_Gage_Skidmore.jpg/220px-Quentin_Tarantino_by_Gage_Skidmore.jpg', NULL, NULL),
+	(25, 'Ridley', 'Scott', '1937-11-30', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Ridley_Scott_%286998769387%29.jpg/220px-Ridley_Scott_%286998769387%29.jpg', NULL, NULL),
+	(26, 'James', 'Cameron', '1954-08-16', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/James_Cameron_by_Gage_Skidmore.jpg/290px-James_Cameron_by_Gage_Skidmore.jpg', NULL, NULL),
+	(27, 'Alfonso', 'Cuarón', '1961-11-28', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Alfonso_Cuar%C3%B3n%2C_President_jury_Venezia_72_%2825805089406%29_%28cropped%29.jpg/220px-Alfonso_Cuar%C3%B3n%2C_President_jury_Venezia_72_%2825805089406%29_%28cropped%29.jpg', NULL, NULL),
+	(28, 'Tim', 'Burton', '1958-08-25', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Tim_Burton-63605.jpg/220px-Tim_Burton-63605.jpg', NULL, NULL),
+	(29, 'Woody', 'Allen', '1935-12-01', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Woody-Allen-2015-07-18-by-Adam-Bielawski.jpg/260px-Woody-Allen-2015-07-18-by-Adam-Bielawski.jpg', NULL, NULL),
+	(30, 'Francis', 'Ford Coppola', '1939-04-07', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Francis_Ford_Coppola_2011_CC.jpg/220px-Francis_Ford_Coppola_2011_CC.jpg', NULL, NULL),
+	(31, 'Clint', 'Eastwood', '1930-11-05', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Clint_Eastwood_at_2010_New_York_Film_Festival.jpg/220px-Clint_Eastwood_at_2010_New_York_Film_Festival.jpg', NULL, NULL),
+	(32, 'Sergio', 'Leone', '1929-01-03', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Sergio_Leone.jpg/260px-Sergio_Leone.jpg', '1989-04-30', NULL),
+	(34, 'Tom', 'Hardy', '1977-09-11', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Tom_Hardy_by_Gage_Skidmore.jpg/260px-Tom_Hardy_by_Gage_Skidmore.jpg', NULL, NULL),
+	(35, 'Denis', 'Villeneuve', '1967-10-03', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Denis_Villeneuve_by_Gage_Skidmore.jpg/260px-Denis_Villeneuve_by_Gage_Skidmore.jpg', NULL, NULL),
+	(37, 'Chuck', 'Russel', '2020-12-05', 'Male', 'https://m.media-amazon.com/images/M/MV5BZDhkZDdhMDEtYWJkYi00MTZkLWJlMmMtY2ZkOWIzODhlMjhlXkEyXkFqcGc@._V1_.jpg', NULL, NULL),
+	(38, 'Jim', 'Carrey', '1962-01-17', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Jim_Carrey_2008.jpg/220px-Jim_Carrey_2008.jpg', NULL, NULL),
+	(39, 'Peter', 'Greene', '1965-10-08', 'Male', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Peter_Greene_2014.jpg/220px-Peter_Greene_2014.jpg', NULL, NULL),
+	(41, 'Louis', 'Hayotte', '1997-08-04', 'Male', 'https://t4.ftcdn.net/jpg/06/10/19/43/360_F_610194339_3CtGOkv4wIiAyybcib4IrFX0nnc83Bv6.jpg', '1999-09-04', 'test');
 
 -- Listage de la structure de table cinema_louis. play
 CREATE TABLE IF NOT EXISTS `play` (
-  `id_movie` int DEFAULT NULL,
-  `id_actor` int DEFAULT NULL,
+  `id_movie` int NOT NULL,
+  `id_actor` int NOT NULL,
   `id_role` int DEFAULT NULL,
   KEY `FK_play_movie` (`id_movie`),
   KEY `FK_play_actor` (`id_actor`),
   KEY `FK_play_role` (`id_role`),
   CONSTRAINT `FK_play_actor` FOREIGN KEY (`id_actor`) REFERENCES `actor` (`id_actor`) ON DELETE CASCADE,
-  CONSTRAINT `FK_play_movie` FOREIGN KEY (`id_movie`) REFERENCES `movie` (`id_movie`) ON DELETE CASCADE,
-  CONSTRAINT `FK_play_role` FOREIGN KEY (`id_role`) REFERENCES `casting_role` (`id_role`)
+  CONSTRAINT `FK_play_casting_role` FOREIGN KEY (`id_role`) REFERENCES `casting_role` (`id_role`) ON DELETE SET NULL,
+  CONSTRAINT `FK_play_movie` FOREIGN KEY (`id_movie`) REFERENCES `movie` (`id_movie`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Listage des données de la table cinema_louis.play : ~25 rows (environ)
+-- Listage des données de la table cinema_louis.play : ~26 rows (environ)
 INSERT INTO `play` (`id_movie`, `id_actor`, `id_role`) VALUES
 	(1, 1, 1),
 	(2, 2, 2),
