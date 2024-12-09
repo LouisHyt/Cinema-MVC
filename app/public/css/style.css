@@ -52,4 +52,5 @@ body {
 
 #content{
     grid-area: main;
+    background-color: var(--background-secondary-clr);
 }

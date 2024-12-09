@@ -43,19 +43,33 @@ body{
     color: white;
     font-size: 1rem;
     text-align: center;
-
+    
     & > p {
         display: inline-block;
         padding: 1rem;
         border-radius: 10px;
     }
-
+    
     &.success > p {
         background-color: #28a745;
     }
-
+    
     &.error > p {
         background-color: #dc3545;
+    }
+}
+
+.back-link{
+    color: white;
+    display: block;
+    font-size: 1rem;
+    cursor: pointer;
+    padding-inline: 2rem;
+    padding-top: 2rem;
+    color: rgb(85, 132, 194);
+
+    &:hover{
+        text-decoration: underline;
     }
 }
 

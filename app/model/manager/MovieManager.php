@@ -41,6 +41,7 @@
                     mo.poster_image,
                     mo.banner_image, 
                     CONCAT(pe.first_name, ' ', pe.last_name) as director_name,
+                    pe.id_person,
                     di.id_director,
                     GROUP_CONCAT(ca.label) as categories
 

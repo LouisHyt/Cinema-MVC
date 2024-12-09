@@ -26,6 +26,10 @@
             unset($_SESSION['formstatus']);
         }
     ?>
+    <a href="./" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Go back to the home Page</span>
+    </a>
     <main class="admin-panel">
         <section class="admin-header">
             <div class="select-entity">

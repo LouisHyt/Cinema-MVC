@@ -52,7 +52,7 @@
 
             if($personDetails["id_actor"] != null) {
                 $request = $pdo->prepare("
-                    SELECT mo.title, mo.poster_image
+                    SELECT mo.title, mo.poster_image, mo.id_movie
                     FROM movie mo
                     INNER JOIN play pl ON mo.id_movie = pl.id_movie
                     INNER JOIN actor ac ON pl.id_actor = ac.id_actor
@@ -64,7 +64,7 @@
                 
             } else if($personDetails["id_director"] != null) {
                 $request = $pdo->prepare("
-                    SELECT mo.title, mo.poster_image
+                    SELECT mo.title, mo.poster_image, mo.id_movie
                     FROM movie mo
                     WHERE mo.id_director = :id
                 ");
@@ -89,7 +89,8 @@
                     pe.genre, 
                     pe.profile_image, 
                     pe.bio, 
-                    pe.death_date
+                    pe.death_date,
+                    pe.id_person,
                     ac.id_actor
                 FROM person pe
                 INNER JOIN actor ac ON pe.id_person = ac.id_person 
@@ -108,6 +109,7 @@
                     pe.profile_image, 
                     pe.bio, 
                     pe.death_date,
+                    pe.id_person,
                     di.id_director
                 FROM person pe
                 INNER JOIN director di ON pe.id_person = di.id_person 
