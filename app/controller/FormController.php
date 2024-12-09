@@ -119,6 +119,39 @@
 
         //Edit
         public function showEditMovie($id) {
+            $personManager = new PersonManager();
+            $roleManager = new RoleManager();
+            $categoryManager = new CategoryManager();
+            $movieManager = new MovieManager();
+            $categories = $categoryManager->getCategories();
+            $roles = $roleManager->getRoles();
+            $directors = $personManager->getDirectors();
+            $movieData = $movieManager->getMovieById($id);
+            if(!empty($_POST)) {
+                session_start();
+                $postData = Utils::validateMovieForm();
+                if(!$postData["movieTitle"] || !$postData["releaseDate"] || !$postData["duration"]) {
+                    $_SESSION["formstatus"] = [
+                        "success" => false,
+                        "message" => "The movie must have a valid title, release date, and duration!",
+                    ];
+                } else {
+                    $error = $movieManager->editMovie($postData, $id);
+                    if(isset($error)) {
+                        $_SESSION["formstatus"] = [
+                            "success" => false,
+                            "message" => $error->errorInfo[2],
+                        ];
+                    } else {
+                        $_SESSION["formstatus"] = [
+                            "success" => true,
+                            "message" => "The movie " . $postData["title"] . " has been successfully updated!",
+                        ];
+                        header("Location: ./?action=admin&entity=movies");
+                        exit();
+                    }
+                }
+            }
             require "view/forms/formMovie.php";
         }
 

@@ -38,9 +38,10 @@
                     mo.duration, 
                     mo.synopsis, 
                     mo.note, 
-                    mo.poster_image, 
+                    mo.poster_image,
+                    mo.banner_image, 
                     CONCAT(pe.first_name, ' ', pe.last_name) as director_name,
-                    pe.id_person as director_id,
+                    di.id_director,
                     GROUP_CONCAT(ca.label) as categories
 
                 FROM movie mo
@@ -59,7 +60,9 @@
                     CONCAT(pe.first_name, ' ', pe.last_name) as actor_name,
                     pe.profile_image,
                     pe.id_person,
-                    cr.role_name
+                    ac.id_actor,
+                    cr.role_name,
+                    cr.id_role
                 FROM movie mo
                 INNER JOIN play pl ON mo.id_movie = pl.id_movie
                 INNER JOIN actor ac ON pl.id_actor = ac.id_actor
@@ -162,6 +165,73 @@
                             VALUES (:id_movie, :id_actor, :id_role)
                         ");
                         $request->bindValue(":id_movie", $idMovie, \PDO::PARAM_INT);
+                        $request->bindValue(":id_actor", $id_actor, \PDO::PARAM_INT);
+                        $request->bindValue(":id_role", $id_role, \PDO::PARAM_INT);
+                        $request->execute();
+                    }
+                }
+
+            } catch (\PDOException $error) {
+                return $error;
+            }
+        }
+
+        public function editMovie($data, int $id) {
+
+            $pdo = Connect::seConnecter();
+            try{
+                $request = $pdo->prepare("
+                    UPDATE movie
+                    SET title = :title, release_date = :releaseDate, duration = :duration, note = :note, synopsis = :synopsis, poster_image = :posterUrl, banner_image = :bannerUrl, id_director = :director
+                    WHERE id_movie = :id_movie
+                ");
+                $request->bindValue(":title", $data["movieTitle"], \PDO::PARAM_STR);
+                $request->bindValue(":releaseDate", $data["releaseDate"], \PDO::PARAM_STR);
+                $request->bindValue(":duration", $data["duration"], \PDO::PARAM_INT);
+                $request->bindValue(":note", $data["note"], \PDO::PARAM_INT);
+                $request->bindValue(":synopsis", $data["synopsis"], \PDO::PARAM_STR);
+                $request->bindValue(":posterUrl", $data["posterUrl"], \PDO::PARAM_STR);
+                $request->bindValue(":bannerUrl", $data["bannerUrl"], \PDO::PARAM_STR);
+                $request->bindValue(":director", $data["director"], \PDO::PARAM_INT);
+                $request->bindValue(":id_movie", $id, \PDO::PARAM_INT);
+                $request->execute();
+
+                //Update categories
+                $request = $pdo->prepare("
+                    DELETE FROM belongs
+                    WHERE id_movie = :id_movie
+                ");
+                $request->bindValue(":id_movie", $id, \PDO::PARAM_INT);
+                $request->execute();
+                if($data["categories"] !== null) {
+                    foreach($data["categories"] as $category) {
+                        $category = intval($category);
+                        $request = $pdo->prepare("
+                            INSERT INTO belongs (id_movie, id_category)
+                            VALUES (:id_movie, :id_category)
+                        ");
+                        $request->bindValue(":id_movie", $id, \PDO::PARAM_INT);
+                        $request->bindValue(":id_category", $category, \PDO::PARAM_INT);
+                        $request->execute();
+                    }
+                }
+
+                //update Actors
+                $request = $pdo->prepare("
+                    DELETE FROM play
+                    WHERE id_movie = :id_movie
+                ");
+                $request->bindValue(":id_movie", $id, \PDO::PARAM_INT);
+                $request->execute();
+                if($data["actors"] !== null) {
+                    foreach($data["actors"] as $actor) {
+                        $id_actor = intval($actor["id_actor"]);
+                        $id_role = intval($actor["id_role"]);
+                        $request = $pdo->prepare("
+                            INSERT INTO play (id_movie, id_actor, id_role)
+                            VALUES (:id_movie, :id_actor, :id_role)
+                        ");
+                        $request->bindValue(":id_movie", $id, \PDO::PARAM_INT);
                         $request->bindValue(":id_actor", $id_actor, \PDO::PARAM_INT);
                         $request->bindValue(":id_role", $id_role, \PDO::PARAM_INT);
                         $request->execute();

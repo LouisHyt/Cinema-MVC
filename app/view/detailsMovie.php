@@ -32,7 +32,7 @@
                 </div>
                 <div class="stat-realisator">
                     <i class="fa-solid fa-user-tie"></i>
-                    <a href="./?action=detailsPerson&id=<?= $movieDetails['movie']["director_id"] ?>"><?= $movieDetails['movie']["director_name"] ?></a>
+                    <a href="./?action=detailsPerson&id=<?= $movieDetails['movie']["id_director"] ?>"><?= $movieDetails['movie']["director_name"] ?></a>
                 </div>
             </div>
             <div class="movie-synopsis">
