@@ -1,3 +1,133 @@
+.person-details {
+    padding: 2rem;
+    color: white;
+    max-height: 100%;
+    overflow-y: auto;
+}
 
+.person-details::-webkit-scrollbar {
+    background: transparent;
+    width: 5px;
+}   
 
+.person-details::-webkit-scrollbar-thumb {
+    background: #303030;
+    border-radius: 5px;
+}
 
+.person-infos {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.person-poster {
+    flex-shrink: 0;
+    width: 300px;
+    height: 450px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.person-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.person-content {
+    flex: 1;
+}
+
+.person-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stats > div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--discrete-clr);
+}
+
+.stats i {
+    color: var(--accent-clr);
+    width: 20px;
+}
+
+.person-bio {
+    border-radius: 8px;
+    margin-top: 1.5rem;
+}
+
+.person-bio pre {
+    font-family: Montserrat, sans-serif;
+    white-space: pre-wrap;
+    line-height: 1.6;
+}
+
+.filmography-infos {
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.filmography-infos h3 {
+    color: white;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.movie-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.movie-card {
+    transition: transform 0.2s ease;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+}
+
+.movie-image {
+    height: 300px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.movie-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.movie-title {
+    text-align: center;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .person-infos {
+        flex-direction: column;
+    }
+
+    .person-poster {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 2/3;
+    }
+}

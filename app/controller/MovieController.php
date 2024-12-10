@@ -15,6 +15,10 @@
         public function detailsMovie($id) {
             $movieManager = new MovieManager();
             $movieDetails = $movieManager->getMovieById($id);
+            if(!$movieDetails["movie"]["id_movie"]){
+                header("location: ./");
+                exit;
+            }
             require "view/detailsMovie.php";
         }
 

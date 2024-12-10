@@ -26,11 +26,9 @@
                     <span><?= implode(", ", $personDetails["jobs"]) ?></span>
                 </div>
             </div>
-            <?php if($personDetails["bio"]) : ?>
             <div class="person-bio">
-                <pre><?= $personDetails["bio"] ?></pre>
+                <pre><?= $personDetails["bio"] !== null ? $personDetails["bio"] : "No biography available" ?></pre>
             </div>
-            <?php endif; ?>
         </div>
     </section>
     <?php if(isset($personDetails["played_movies"])) : ?>

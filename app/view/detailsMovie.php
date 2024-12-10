@@ -14,9 +14,13 @@
         <div class="movie-content">
             <h2><?= $movieDetails['movie']["title"] ?></h2>
             <div class="categories">
-                <?php foreach (explode(",", $movieDetails['movie']["categories"]) as $category) : ?>
-                    <span class="category"><?= $category ?></span>
-                <?php endforeach; ?>
+                <?php
+                if($movieDetails["movie"]["categories"]){
+                    foreach (explode(",", $movieDetails['movie']["categories"]) as $category){
+                        echo "<span class='category'>$category</span>";
+                    }
+                }
+                ?>
             </div>
             <div class="stats">
                 <div class="stat-note">

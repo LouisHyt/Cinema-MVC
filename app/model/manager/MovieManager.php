@@ -38,6 +38,7 @@
                     mo.duration, 
                     mo.synopsis, 
                     mo.note, 
+                    mo.id_movie,
                     mo.poster_image,
                     mo.banner_image, 
                     CONCAT(pe.first_name, ' ', pe.last_name) as director_name,
@@ -80,7 +81,6 @@
                 "movie" => $movie,
                 "casting" => $casting
             ];
-
             return $data;
         }
 
